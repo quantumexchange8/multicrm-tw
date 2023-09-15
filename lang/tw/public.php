@@ -221,7 +221,7 @@ return [
     "Deposit" => "入金",
     "Address" => "地址",
     "TxID" => "TxID",
-    "Receipt" => "收據",
+    "Payment Receipt" => "收據",
     "Copied" => "已複制",
     "Deposit Acknowledgement 1" => ":company 嚴格不接受第三方支付。存入您交易賬戶的所有資金必須與您的 :company_2 交易賬戶同名。",
     "Deposit Acknowledgement 2" => "客戶承認，他們可能需要提供有關存款來源的信息、客戶的一般財富以及 :company 在處理存款請求時認為識別資金來源所必需的任何其他信息，並同意提供 :company_2 要求的所有信息。未能提供所需信息可能會導致您的請求處理過程出現重大延誤。 :company_3 將不對任何延誤或因此而遭受的損失負責。",
@@ -329,4 +329,5 @@ return [
     ],
     "Bank" => "銀行",
     "FPX" => "FPX",
+    "Process" => "繼續",
 ];

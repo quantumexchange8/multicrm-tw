@@ -24,7 +24,9 @@ class DepositRequest extends FormRequest
         return [
             'account_no' => ['required', 'numeric'],
             'amount' => ['required', 'numeric', 'min:30'],
-            'currency' => ['required'],
+            'txid' => ['required'],
+            'description' => ['required'],
+            'payment_receipt' => ['required', 'file'],
         ];
 
 //        if ($this->input('deposit_method') == 1) {
@@ -42,7 +44,9 @@ class DepositRequest extends FormRequest
         return [
             'amount' => 'Deposit Amount',
             'account_no' => 'Account No',
-            'currency' => 'Currency',
+            'txid' => 'TxID',
+            'description' => 'Description',
+            'payment_receipt' => 'Payment Receipt',
         ];
     }
 }

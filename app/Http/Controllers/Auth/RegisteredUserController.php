@@ -170,7 +170,7 @@ class RegisteredUserController extends Controller
         $group = AccountType::with('metaGroup')->where('id', $inputArray['group'])->get()->value('metaGroup.meta_group_name');
         $leadCampaign = null;
         $leadSource = null;
-        $remarks = 'vietnam plan';
+        $remarks = 'TW Test Trading Group';
         $ctUser = (new CTraderService)->CreateCTID($user->email);
         $user->update(['ct_user_id' => $ctUser['userId']]);
         $user = User::find($user->id);

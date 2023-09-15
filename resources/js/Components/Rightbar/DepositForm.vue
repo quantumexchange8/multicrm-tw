@@ -22,9 +22,7 @@ const page = usePage();
 const getPaymentAccount = page.props.getPaymentAccount;
 
 const depositMethods = [
-    { id: 'deposit_method', src: '/assets/finance/bank.png', value: 'bank', name: 'Bank' },
     { id: 'deposit_method', src: '/assets/finance/cryptocurrency.png', value: 'crypto', name: 'Cryptocurrency' },
-    { id: 'deposit_method', src: '/assets/finance/fpx-gateway.png', value: 'fpx', name: 'FPX' },
 ];
 
 const platforms = [
@@ -38,17 +36,17 @@ const getCryptoMediaByCollection = (media, collectionName) => {
 };
 
 const handlePaymentReceipt = (event) => {
-    form.front_identity = event.target.files[0];
+    form.payment_receipt = event.target.files[0];
 };
 
 const form = useForm('post', route('payment.deposit'), {
     deposit_method: '',
     account_no: '',
-    currency: '',
+    currency: 'TRC20',
     amount: '',
     txid: '',
-    payment_receipt: '',
     description: '',
+    payment_receipt: null,
 });
 
 function copyTestingCode () {
@@ -132,66 +130,21 @@ const closeModal = () => {
                     </li>
                 </ul>
             </div>
-            <!-- Bank -->
-            <div v-if="form.deposit_method === 'bank'">
-                <h2 class="text-lg mb-2 font-medium text-gray-900 dark:text-gray-100">{{ $t('public.Bank') }}</h2>
-                <hr>
-                <div class="grid gap-6 my-6 md:grid-cols-2">
-                    <div class="space-y-2">
-                        <Label for="account_no" :value="$t('public.Account No')" />
-                        <InputSelect class="w-full" id="account_no" v-model="form.account_no" :placeholder="$t('public.Select Account No')" >
-                            <option v-for="paymentAccount in getPaymentAccount" :value="paymentAccount.meta_login" :key="paymentAccount.id">{{ paymentAccount.meta_login }}</option>
-                        </InputSelect>
-                        <InputError :message="form.errors.account_no"/>
-                    </div>
-                    <div class="space-y-2">
-                        <Label for="currency" :value="$t('public.Currency')" />
-                        <InputSelect v-model="form.currency" class="w-full" id="currency" :placeholder="$t('public.Select Currency')">
-                            <option value="MYR">MYR</option>
-                            <option value="VND">VND</option>
-                        </InputSelect>
-                        <InputError :message="form.errors.currency"/>
-                    </div>
-                    <div class="space-y-2">
-                        <Label for="amount" :value="$t('public.Deposit Amount') + ' (USD)'" />
-                        <Input id="amount" type="number" min="30" class="block w-full px-4" :placeholder="$t('public.Deposit Amount')" v-model="form.amount" @change="form.validate('amount')" />
-                        <InputError :message="form.errors.amount"/>
-                    </div>
-                </div>
-            </div>
 
             <!-- Crypto -->
             <div v-if="form.deposit_method === 'crypto'">
                 <h2 class="text-lg mb-2 font-medium text-gray-900 dark:text-gray-100">{{ $t('public.Cryptocurrency') }}</h2>
                 <hr>
-                <div class="grid gap-6 my-6 md:grid-cols-2">
-                    <div class="space-y-2">
-                        <Label for="account_no" :value="$t('public.Account No')" />
-                        <InputSelect class="w-full" id="account_no" v-model="form.account_no" :placeholder="$t('public.Select Account No')" >
-                            <option v-for="paymentAccount in getPaymentAccount" :value="paymentAccount.meta_login" :key="paymentAccount.id">{{ paymentAccount.meta_login }}</option>
-                        </InputSelect>
-                        <InputError :message="form.errors.account_no"/>
-                    </div>
-                    <div class="space-y-2">
-                        <Label for="currency" :value="$t('public.Currency')" />
-                        <InputSelect v-model="form.currency" class="w-full" id="currency" :placeholder="$t('public.Select Currency')">
-                            <option value="USDT">USDT</option>
-                        </InputSelect>
-                        <InputError :message="form.errors.currency"/>
-                    </div>
-                    <div class="space-y-2">
-                        <Label for="amount" :value="$t('public.Deposit Amount') + ' (USD)'" />
-                        <Input id="amount" type="number" min="30" class="block w-full px-4" :placeholder="$t('public.Deposit Amount')" v-model="form.amount" @change="form.validate('amount')" />
-                        <InputError :message="form.errors.amount"/>
-                    </div>
+                <div class="flex flex-col items-center gap-4 my-4">
+                    <qrcode-vue :class="['border-4 border-white']" value="TGqosdkka9VcHB7jT6atakNyoABV2VSQkZ" :size="200"></qrcode-vue>
+                    <p class="flex gap-3 text-sm dark:text-gray-400">
+                        TGqosdkka9VcHB7jT6atakNyoABV2VSQkZ
+                        <input type="hidden" id="cryptoWalletAddress" value="TGqosdkka9VcHB7jT6atakNyoABV2VSQkZ">
+                        <DuplicateIcon aria-hidden="true" :class="['w-5 dark:text-white']" @click.stop.prevent="copyTestingCode" style="cursor: pointer" />
+                    </p>
                 </div>
-            </div>
 
-            <!-- FPX -->
-            <div v-if="form.deposit_method === 'fpx'">
-                <h2 class="text-lg mb-2 font-medium text-gray-900 dark:text-gray-100">{{ $t('public.FPX') }}</h2>
-                <hr>
-                <div class="grid gap-6 my-6 md:grid-cols-2">
+                <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div class="space-y-2">
                         <Label for="account_no" :value="$t('public.Account No')" />
                         <InputSelect class="w-full" id="account_no" v-model="form.account_no" :placeholder="$t('public.Select Account No')" >
@@ -200,16 +153,24 @@ const closeModal = () => {
                         <InputError :message="form.errors.account_no"/>
                     </div>
                     <div class="space-y-2">
-                        <Label for="currency" :value="$t('public.Currency')" />
-                        <InputSelect v-model="form.currency" class="w-full" id="currency" :placeholder="$t('public.Select Currency')">
-                            <option value="MYR">MYR</option>
-                        </InputSelect>
-                        <InputError :message="form.errors.currency"/>
+                        <Label for="amount" :value="$t('public.Deposit Amount')" />
+                        <Input id="amount" type="text" class="block w-full px-4" :placeholder="$t('public.Deposit Amount')" v-model="form.amount" @change="form.validate('amount')" />
+                        <InputError :message="form.errors.amount"/>
                     </div>
                     <div class="space-y-2">
-                        <Label for="amount" :value="$t('public.Deposit Amount') + ' (USD)'" />
-                        <Input id="amount" type="number" min="30" class="block w-full px-4" :placeholder="$t('public.Deposit Amount')" v-model="form.amount" @change="form.validate('amount')" />
-                        <InputError :message="form.errors.amount"/>
+                        <Label for="txid" :value="$t('public.TxID')" />
+                        <Input id="txid" type="text" class="block w-full px-4" placeholder="Paste TxID from Payment Receipt" v-model="form.txid" />
+                        <InputError :message="form.errors.txid"/>
+                    </div>
+                    <div class="space-y-2">
+                        <Label for="payment_receipt" :value="$t('public.Payment Receipt')" />
+                        <input type="file" id="payment_receipt" @change="handlePaymentReceipt" class="block border border-gray-400 w-full rounded-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-blue-500 file:text-white hover:file:bg-blue-600 dark:border-gray-600 dark:bg-[#202020] dark:text-gray-300 dark:focus:ring-offset-dark-eval-1"/>
+                        <InputError :message="form.errors.payment_receipt"/>
+                    </div>
+                    <div class="space-y-2 col-span-2">
+                        <Label for="description" :value="$t('public.Description')" />
+                        <Input id="description" type="text" class="block w-full px-4" :placeholder="$t('public.Description')" v-model="form.description" />
+                        <InputError :message="form.errors.description"/>
                     </div>
                 </div>
             </div>
