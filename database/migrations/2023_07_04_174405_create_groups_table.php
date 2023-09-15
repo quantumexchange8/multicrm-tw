@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('groups', function (Blueprint $table) {
-            $table->id();
-            $table->string('display')->nullable();
-            $table->string('value')->nullable();
-            $table->string('meta_group_name');
-            $table->timestamps();
-            $table->softDeletes();
-        });
+//        Schema::create('groups', function (Blueprint $table) {
+//            $table->id();
+//            $table->string('display')->nullable();
+//            $table->string('value')->nullable();
+//            $table->string('meta_group_name');
+//            $table->timestamps();
+//            $table->softDeletes();
+//        });
     }
 
     /**

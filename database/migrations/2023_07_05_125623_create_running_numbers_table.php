@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('running_numbers', function (Blueprint $table) {
-            $table->id();
-            $table->string('type');
-            $table->string('prefix');
-            $table->integer('digits');
-            $table->unsignedInteger('last_number')->default(0);
-            $table->timestamps();
-            $table->softDeletes();
-        });
+//        Schema::create('running_numbers', function (Blueprint $table) {
+//            $table->id();
+//            $table->string('type');
+//            $table->string('prefix');
+//            $table->integer('digits');
+//            $table->unsignedInteger('last_number')->default(0);
+//            $table->timestamps();
+//            $table->softDeletes();
+//        });
     }
 
     /**

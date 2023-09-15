@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gateway_lists', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('description');
-            $table->string('currency');
-            $table->string('status')->default('Active');
-            $table->string('delete')->default(false);
-            $table->timestamps();
-            $table->softDeletes();
-        });
+//        Schema::create('gateway_lists', function (Blueprint $table) {
+//            $table->id();
+//            $table->string('name');
+//            $table->string('description');
+//            $table->string('currency');
+//            $table->string('status')->default('Active');
+//            $table->string('delete')->default(false);
+//            $table->timestamps();
+//            $table->softDeletes();
+//        });
     }
 
     /**

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name_zhHant');
             $table->string('name_vn');
             $table->string('iso');
+            $table->string('phone_code', 20);
         });
     }
 
