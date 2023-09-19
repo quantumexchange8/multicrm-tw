@@ -247,7 +247,6 @@ const closeModal = () => {
             >
                 Payment Account
             </h2>
-            <BankAccountList />
             <CryptoAccountList />
         </div>
 

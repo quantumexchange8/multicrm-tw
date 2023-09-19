@@ -75,6 +75,11 @@ class NetworkController extends Controller
 
     public function network(Request $request)
     {
+        return Inertia::render('GroupNetwork/NetworkTree');
+    }
+
+    public function treeData(Request $request)
+    {
         $user = Auth::user();
 
         $usersQuery = User::where('id', $user->id)
@@ -127,10 +132,7 @@ class NetworkController extends Controller
             $rootNode['children'] = $tree;
         }
 
-        return Inertia::render('GroupNetwork/NetworkTree', [
-            'root' => $rootNode,
-            'filters' => $request->only('search')
-        ]);
+        return response()->json($rootNode);
     }
 
     public function getRebateAllocation()

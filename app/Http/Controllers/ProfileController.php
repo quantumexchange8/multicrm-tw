@@ -56,19 +56,7 @@ class ProfileController extends Controller
 
     public function payment_account(Request $request): Response
     {
-        $countries = SettingCountry::get('name_en');
-        $avatar = Auth::user()->getFirstMediaUrl('profile_photo');
-        $frontIdentity = Auth::user()->getFirstMediaUrl('front_identity');
-        $backIdentity = Auth::user()->getFirstMediaUrl('back_identity');
-
-        return Inertia::render('Profile/PaymentAccount', [
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-            'status' => session('status'),
-            'countries' => $countries,
-            'avatar' => $avatar,
-            'frontIdentity' => $frontIdentity,
-            'backIdentity' => $backIdentity,
-        ]);
+        return Inertia::render('Profile/PaymentAccount');
     }
 
     /**

@@ -7,16 +7,11 @@ import BankAccountForm from "@/Pages/Profile/Partials/BankAccountForm.vue";
 import CryptoAccountForm from "@/Pages/Profile/Partials/CryptoAccountForm.vue";
 import {ref} from "vue";
 
-const props = defineProps({
-    countries: Object
-})
-
 const channels = [
-    { id: 'channel', src: '/assets/finance/bank.png', value: 'bank', name: 'Bank Account' },
     { id: 'channel', src: '/assets/finance/cryptocurrency.png', value: 'crypto', name: 'Cryptocurrency' },
 ];
 
-const paymentPlatform = ref('bank');
+const paymentPlatform = ref('crypto');
 </script>
 
 <template>
@@ -63,15 +58,6 @@ const paymentPlatform = ref('bank');
                     </label>
                 </li>
             </ul>
-
-            <!-- Bank -->
-            <div v-if="paymentPlatform === 'bank'">
-
-                <BankAccountForm
-                    :countries="props.countries"
-                />
-
-            </div>
 
             <!-- Crypto -->
             <div v-if="paymentPlatform === 'crypto'">

@@ -1,5 +1,6 @@
 <script>
 import {PlusCircleIcon, MinusCircleIcon} from "@heroicons/vue/solid";
+
 export default {
     name: 'Tree',
     components: {PlusCircleIcon, MinusCircleIcon},
@@ -49,6 +50,15 @@ export default {
         if (window.innerWidth < 1024) {
             this.treeState = true
         }
+    },
+    setup() {
+        function formatAmount(amount) {
+            return parseFloat(amount).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        return {
+            formatAmount
+        };
     },
     emits: ['onClick']
 }
@@ -120,11 +130,11 @@ export default {
                                 <span class="text-xs dark:text-dark-eval-4">Level</span>
                             </div>
                             <div class="flex flex-col text-center">
-                                <span>$ {{ node.total_group_deposit }}</span>
+                                <span>$ {{ formatAmount(node.total_group_deposit) }}</span>
                                 <span class="text-xs dark:text-dark-eval-4">Total Group Deposit</span>
                             </div>
                             <div class="flex flex-col text-center">
-                                <span>$ {{ node.total_group_withdrawal }}</span>
+                                <span>$ {{ formatAmount(node.total_group_withdrawal) }}</span>
                                 <span class="text-xs dark:text-dark-eval-4">Total Group Withdrawal</span>
                             </div>
                             <div class="flex flex-col text-center">

@@ -285,7 +285,7 @@ return [
     "Bank Name" => "Bank Name",
     "Cryptocurrency Address" => "Cryptocurrency Address",
     "Cryptocurrency" => "Cryptocurrency",
-    "Withdrawal Acknowledgement 1" => "Due to AML / CTF laws, :company cannot deposit funds to third parties. All money withdrawn from your account must go to a bank or Money-bookers account in the same name as your :company_2 trading account.",
+    "Withdrawal Acknowledgement 1" => "Due to AML / CTF laws, :company cannot deposit funds to third parties. All money withdrawn from your account must go to a bank or Money-bookers account in the same name as your :company trading account.",
     "Withdrawal Acknowledgement 2" => ":company does not accept deposits or withdrawals made under a different name to the registered trading account.",
     "Withdrawal Acknowledgement 3" => "It is the client's responsibility to ensure there are sufficient funds available for the withdrawal request to be processed. Failing to maintain sufficient balance in the account may result in the rejection of the withdrawal request.",
     "Withdrawal Acknowledgement 4" => "All initial credit/debit card and bank wire withdrawal requests must be verified for safety and security by the provision of a bank statement; which includes account holder information and bank details.",

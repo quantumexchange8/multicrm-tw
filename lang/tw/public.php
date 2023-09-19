@@ -285,7 +285,7 @@ return [
     "Bank Name" => "銀行名稱",
     "Cryptocurrency Address" => "加密貨幣地址",
     "Cryptocurrency" => "加密貨幣",
-    "Withdrawal Acknowledgement 1" => "由于 AML / CTF 法律，:company 不能向第三方存入資金。從您的賬戶中提取的所有資金必須轉到與您的 :company_2 交易賬戶同名的銀行或 Money-bookers 賬戶。",
+    "Withdrawal Acknowledgement 1" => "由于 AML / CTF 法律，:company 不能向第三方存入資金。從您的賬戶中提取的所有資金必須轉到與您的 :company 交易賬戶同名的銀行或 Money-bookers 賬戶。",
     "Withdrawal Acknowledgement 2" => ":company 不接受以與注冊交易賬戶不同的名稱進行的存款或取款。",
     "Withdrawal Acknowledgement 3" => "客戶有責任確保有足夠的資金來處理提款請求。未能在賬戶中保持足夠的余額可能會導致提款請求被拒絕。",
     "Withdrawal Acknowledgement 4" => "所有初始信用卡/借記卡和銀行電彙提款請求都必須通過提供銀行對賬單來驗證安全性；其中包括賬戶持有人信息和銀行詳細信息。",

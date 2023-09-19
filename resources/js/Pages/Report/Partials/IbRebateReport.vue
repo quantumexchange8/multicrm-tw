@@ -198,6 +198,9 @@ const paginationActiveClass = [
                 <thead class="text-xs font-bold text-gray-700 uppercase bg-gray-50 dark:bg-transparent dark:text-white text-center">
                 <tr>
                     <th scope="col" class="px-4 py-3">
+                        Date
+                    </th>
+                    <th scope="col" class="px-4 py-3">
                         Acc No.
                     </th>
                     <th scope="col" class="px-4 py-3">
@@ -231,6 +234,9 @@ const paginationActiveClass = [
                 </tr>
                 <tr v-for="rebate in ibRebateReport.data" :key="rebate.id" class="bg-white even:dark:bg-transparent odd:dark:bg-dark-eval-0 text-xs font-thin text-gray-900 dark:text-white text-center">
                     <th scope="row" class="px-6 py-4 font-thin rounded-l-full">
+                        {{ formatDate(rebate.closed_time) }}
+                    </th>
+                    <th class="px-6 py-4">
                         {{ rebate.meta_login }}
                     </th>
                     <th class="px-6 py-4">

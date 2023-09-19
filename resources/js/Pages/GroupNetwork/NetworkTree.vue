@@ -13,22 +13,40 @@ import {faRotateRight, faSearch, faX} from "@fortawesome/free-solid-svg-icons";
 import NetworkChild from "@/Pages/GroupNetwork/Partials/NetworkChild.vue";
 import Loading from "@/Components/Loading.vue";
 library.add(faSearch,faX,faRotateRight);
-const props = defineProps({
-    root: Object,
-    filters: Object,
-})
+
 
 function nodeWasClicked(node) {
     console.log('Last Node');
 }
 
-let search = ref(props.filters.search);
+let search = ref(null);
+let root = ref({});
 const isLoading = ref(false);
 
-watch(search, debounce(function(value) {
+watch(search, debounce(function() {
     isLoading.value = true;
-    router.get('/group_network/network_tree', { search: value }, { preserveState: true, replace: true, onFinish: visit => { isLoading.value = false } });
+    getResults(search.value);
 }, 300));
+
+const getResults = async (search = '') => {
+    isLoading.value = true;
+    try {
+        let url = `/group_network/getTreeData`;
+
+        if (search) {
+            url += `?search=${search}`;
+        }
+
+        const response = await axios.get(url);
+        root.value = response.data;
+    } catch (error) {
+        console.error(error);
+    } finally {
+        isLoading.value = false;
+    }
+}
+
+getResults();
 
 function resetField() {
     const url = new URL(window.location.href);
@@ -95,31 +113,14 @@ function handleKeyDown(event) {
             </div>
         </div>
 
-        <div v-if="search">
-            <div v-if="isLoading" class="w-full flex justify-center mt-4">
-                <Loading />
-            </div>
-            <div v-else>
-                <NetworkChild
-                    v-if="search"
-                    :node="root"
-                    @onClick="nodeWasClicked"
-                />
-            </div>
+        <div v-if="isLoading" class="w-full flex justify-center mt-8">
+            <Loading />
         </div>
-        <div v-else>
-            <div class="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-dark-eval-2 dark:text-blue-300" role="alert">
-                <font-awesome-icon
-                    icon="fa-solid fa-search"
-                    class="flex-shrink-0 w-5 h-5 cursor-pointer"
-                    aria-hidden="true"
-                />
-                <span class="sr-only">Info</span>
-                <div class="ml-4">
-                    <span class="font-medium">Search Name/Email. </span>
-                </div>
-            </div>
-        </div>
+        <NetworkChild
+            v-else
+            :node="root"
+            @onClick="nodeWasClicked"
+        />
 
 
     </AuthenticatedLayout>

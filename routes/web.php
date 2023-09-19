@@ -146,6 +146,7 @@ Route::middleware('auth')->group(function () {
          Route::get('/network_tree', [NetworkController::class, 'network'])->name('group_network.network_tree');
          Route::get('/rebate_allocation', [NetworkController::class, 'getRebateAllocation'])->middleware('role:ib')->name('group_network.rebate_allocation');
          Route::post('/rebate_allocation', [NetworkController::class, 'updateRebateAllocation'])->middleware('role:ib')->name('updateRebate.update');
+         Route::get('/getTreeData', [NetworkController::class, 'treeData'])->name('group_network.getTreeData');
      });
 
 });

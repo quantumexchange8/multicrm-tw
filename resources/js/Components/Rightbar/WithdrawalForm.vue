@@ -21,7 +21,6 @@ const page = usePage();
 const getAccountWallets = page.props.getAccountWallets;
 
 const channels = [
-    { id: 'channel', src: '/assets/finance/bank.png', value: 'bank', name: 'Bank Account' },
     { id: 'channel', src: '/assets/finance/cryptocurrency.png', value: 'crypto', name: 'Cryptocurrency' },
 ];
 
@@ -103,43 +102,6 @@ const closeModal = () => {
                     </li>
                 </ul>
                 <InputError :message="form.errors.channel"/>
-
-            </div>
-            <!-- Bank -->
-            <div v-if="form.channel === 'bank'">
-                <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Withdrawal - Bank Account</h2>
-                <hr>
-                <div class="grid grid-cols-1 my-8 gap-2 w-full text-center">
-                    <p class="text-base dark:text-gray-400">Cash Wallet Balance</p>
-                    <p class="text-4xl font-bold dark:text-white">$ {{ $page.props.auth.user.cash_wallet }}</p>
-                </div>
-                <div class="grid grid-cols-1 gap-6" v-if="getAccountWallets.original.bankAccounts.length > 0">
-                    <div class="space-y-2">
-                        <Label for="account_no" value="Withdraw to Cryptocurrency Account " />
-
-                        <InputSelect v-model="form.account_no" class="block w-full text-sm" placeholder="Select bank account">
-                            <option v-for="bankAccount in getAccountWallets.original.bankAccounts" :value="bankAccount.account_no" :key="bankAccount.id">{{ bankAccount.payment_platform_name }} - {{ bankAccount.account_no }}</option>
-                        </InputSelect>
-
-                        <InputError :message="form.errors.account_no"/>
-
-                    </div>
-                    <div class="space-y-2">
-                        <Input id="amount" type="number" min="30" class="block w-full px-4" placeholder="At least $ 30.00" v-model="form.amount" @change="form.validate('amount')" autocomplete="off" />
-                        <InputError :message="form.errors.amount"/>
-
-                    </div>
-                </div>
-                <div v-else class="mt-4 text-center">
-                    <p class="text-gray-500 dark:text-gray-400">Don't have an account?
-                        <Link :href="route('profile.detail')" class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                            Click to Create
-                            <svg class="w-4 h-4 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                            </svg>
-                        </Link>
-                    </p>
-                </div>
 
             </div>
 
