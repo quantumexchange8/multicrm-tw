@@ -58,7 +58,7 @@ const { hasRole } = usePermission();
             </template>
         </SidebarLink>
 
-        <SidebarCollapsible
+        /*<SidebarCollapsible
             v-if="hasRole('ib')"
             title="Trading"
             :active="route().current('trading.*')"
@@ -75,7 +75,7 @@ const { hasRole } = usePermission();
                 :href="route('trading.rebate_summary')"
                 title="Rebate Summary"
                 :active="route().current('trading.rebate_summary')"
-            />
+            />*/
         </SidebarCollapsible>
 
         <SidebarCollapsible
