@@ -58,25 +58,7 @@ const { hasRole } = usePermission();
             </template>
         </SidebarLink>
 
-        /*<SidebarCollapsible
-            v-if="hasRole('ib')"
-            title="Trading"
-            :active="route().current('trading.*')"
-        >
-            <template #icon>
-                <font-awesome-icon
-                    icon="fa-solid fa-handshake-simple"
-                    class="flex-shrink-0 w-5 h-5"
-                    aria-hidden="true"
-                />
-            </template>
-
-            <SidebarCollapsibleItem
-                :href="route('trading.rebate_summary')"
-                title="Rebate Summary"
-                :active="route().current('trading.rebate_summary')"
-            />*/
-        </SidebarCollapsible>
+        
 
         <SidebarCollapsible
             title="Group Network"
