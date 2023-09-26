@@ -15,13 +15,13 @@ const paymentPlatform = ref('crypto');
 </script>
 
 <template>
-    <AuthenticatedLayout title="Profile">
+    <AuthenticatedLayout :title="$t('public.Profile')">
         <template #header>
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-3">
                     <li>
                         <div class="flex items-center">
-                            <Link :href="route('profile.detail')" class="font-semibold text-xl text-gray-700 hover:text-[#FF9E23] dark:text-gray-200 leading-tight dark:hover:text-[#FF9E23]">User Profile</Link>
+                            <Link :href="route('profile.detail')" class="font-semibold text-xl text-gray-700 hover:text-[#FF9E23] dark:text-gray-200 leading-tight dark:hover:text-[#FF9E23]">{{ $t('public.sidebar.User Profile') }}</Link>
                         </div>
                     </li>
                     <li aria-current="page">
@@ -29,7 +29,7 @@ const paymentPlatform = ref('crypto');
                             <svg class="w-3 h-3 text-gray-400 dark:text-white mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                             </svg>
-                            <span class="ml-1 mt-1 font-semibold text-xl text-[#FF9E23] md:ml-2 dark:text-[#FF9E23]">Create Payment Account</span>
+                            <span class="ml-1 mt-1 font-semibold text-xl text-[#FF9E23] md:ml-2 dark:text-[#FF9E23]">{{ $t('public.Create Payment Account') }}</span>
                         </div>
                     </li>
                 </ol>
@@ -53,7 +53,7 @@ const paymentPlatform = ref('crypto');
                     >
                         <div class="flex flex-col items-center gap-2">
                             <img class="object-cover" :src="channel.src" alt="account_platform">
-                            <p class="text-xs dark:text-white">{{ channel.name }}</p>
+                            <p class="text-xs dark:text-white">{{ $t('public.' + channel.name) }}</p>
                         </div>
                     </label>
                 </li>

@@ -101,26 +101,26 @@ const paginationActiveClass = [
             <thead class="text-xs font-bold text-gray-700 uppercase bg-gray-50 dark:bg-transparent dark:text-white text-center">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Account No.
+                    {{ $t('public.Account No') }}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Account Type
+                    {{ $t('public.Account Type') }}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Balance
+                    {{ $t('public.Balance') }}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Equity
+                    {{ $t('public.Equity') }}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Credit
+                    {{ $t('public.Credit') }}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Leverage
+                    {{ $t('public.Leverage') }}
                 </th>
-<!--                <th scope="col" class="px-6 py-3">-->
-<!--                    Actions-->
-<!--                </th>-->
+                <!--                <th scope="col" class="px-6 py-3">-->
+                <!--                    Actions-->
+                <!--                </th>-->
             </tr>
             </thead>
             <tbody>
@@ -143,20 +143,20 @@ const paginationActiveClass = [
                 <td class="px-6 py-4 rounded-r-full">
                     1:{{ tradingAccount.margin_leverage }}
                 </td>
-<!--                <td class="px-6 py-4 flex justify-center gap-2">-->
-<!--                    <Button class="justify-center pl-4 pr-3 pt-1 rounded-full w-8 h-8 focus:outline-none" variant="primary-opacity" @click="openDepositModal">-->
-<!--                        <DepositIcon aria-hidden="true" class="w-6 h-6 absolute" />-->
-<!--                        <span class="sr-only">Deposit</span>-->
-<!--                    </Button>-->
-<!--                    <Button class="justify-center px-4 pt-2 rounded-full w-8 h-8 focus:outline-none" variant="primary-opacity" @click="openResetModal">-->
-<!--                        <ResetIcon aria-hidden="true" class="w-6 h-6 absolute" />-->
-<!--                        <span class="sr-only">Reset</span>-->
-<!--                    </Button>-->
-<!--                    <Button class="justify-center px-4 pt-2 rounded-full w-8 h-8 focus:outline-none" variant="primary-opacity" @click="openSettingModal(tradingAccount.meta_login, tradingAccount.margin_leverage, tradingAccount.id)">-->
-<!--                        <SettingIcon aria-hidden="true" class="w-6 h-6 absolute" />-->
-<!--                        <span class="sr-only">Setting</span>-->
-<!--                    </Button>-->
-<!--                </td>-->
+                <!--                <td class="px-6 py-4 flex justify-center gap-2">-->
+                <!--                    <Button class="justify-center pl-4 pr-3 pt-1 rounded-full w-8 h-8 focus:outline-none" variant="primary-opacity" @click="openDepositModal">-->
+                <!--                        <DepositIcon aria-hidden="true" class="w-6 h-6 absolute" />-->
+                <!--                        <span class="sr-only">Deposit</span>-->
+                <!--                    </Button>-->
+                <!--                    <Button class="justify-center px-4 pt-2 rounded-full w-8 h-8 focus:outline-none" variant="primary-opacity" @click="openResetModal">-->
+                <!--                        <ResetIcon aria-hidden="true" class="w-6 h-6 absolute" />-->
+                <!--                        <span class="sr-only">Reset</span>-->
+                <!--                    </Button>-->
+                <!--                    <Button class="justify-center px-4 pt-2 rounded-full w-8 h-8 focus:outline-none" variant="primary-opacity" @click="openSettingModal(tradingAccount.meta_login, tradingAccount.margin_leverage, tradingAccount.id)">-->
+                <!--                        <SettingIcon aria-hidden="true" class="w-6 h-6 absolute" />-->
+                <!--                        <span class="sr-only">Setting</span>-->
+                <!--                    </Button>-->
+                <!--                </td>-->
             </tr>
             </tbody>
         </table>
@@ -175,34 +175,34 @@ const paginationActiveClass = [
             <h2
                 class="text-lg font-medium mb-2 text-gray-900 dark:text-gray-100"
             >
-                Change Leverage
+                {{ $t('public.Change Leverage') }}
             </h2>
             <hr>
 
             <div class="mt-6 space-y-2">
-                <Label for="account_no" value="Account No" />
-                <Input id="account_no" type="text" class="block w-full px-4" readonly placeholder="Account No" v-model="form.account_no" autofocus />
+                <Label for="account_no" :value="$t('public.Account No')" />
+                <Input id="account_no" type="text" class="block w-full px-4" readonly :placeholder="$t('public.Account No')" v-model="form.account_no" autofocus />
                 <InputError :message="form.errors.account_no"/>
             </div>
 
             <div class="mt-6 space-y-2">
-                <Label for="leverage" value="New Leverage" />
-                <InputSelect v-model="form.leverage" class="block w-full text-sm" placeholder="Choose Leverages">
+                <Label for="leverage" :value="$t('public.New Leverage')" />
+                <InputSelect v-model="form.leverage" class="block w-full text-sm" :placeholder="$t('public.Choose Leverage')">
                     <option v-for="leverage in leverages" :value="leverage.value" :key="leverage.id">{{ leverage.leverage }}</option>
                 </InputSelect>
                 <InputError :message="form.errors.leverage"/>
             </div>
 
             <div class="mt-6 space-y-4">
-                <h3 class="text-[#989898] font-bold">Terms & Conditions</h3>
+                <h3 class="text-[#989898] font-bold">{{ $t('public.Terms & Conditions') }}</h3>
                 <p class="text-[#989898] text-justify">
-                    By submitting this request I acknowledge that I am aware that high leverage carries a large amount of risk to my capital and there is a possibility I could sustain a loss greater than and not limited to the capital I have deposited.
+                    {{ $t('public.Leverage Acknowledgement 1') }}
                 </p>
                 <p class="text-[#989898] text-justify">
-                    I agree that the products issuer is entitled to review my trading activities and adjust the leverage levels on my trading account at its discretion and without any prior warnings or notifications.
+                    {{ $t('public.Leverage Acknowledgement 2') }}
                 </p>
                 <p class="text-[#989898] text-justify">
-                    I understand that by choosing high leverage, I can trade with bigger margin but potentially incur significant losses.
+                    {{ $t('public.Leverage Acknowledgement 3') }}
                 </p>
 
                 <div class="flex items-start">
@@ -210,7 +210,7 @@ const paginationActiveClass = [
                         <Checkbox v-model="form.terms"/>
                     </div>
                     <div class="ml-3">
-                        <label for="terms" class="text-gray-500 dark:text-dark-eval-4">I acknowledge that I have read, and do hereby accept the terms and conditions stated as above.</label>
+                        <label for="terms" class="text-gray-500 dark:text-dark-eval-4">{{ $t('public.Leverage Acknowledgement') }}</label>
                     </div>
                 </div>
                 <InputError :message="form.errors.terms"/>
@@ -219,7 +219,7 @@ const paginationActiveClass = [
 
             <div class="mt-6 flex justify-end">
                 <Button variant="secondary" @click="closeModal">
-                    Cancel
+                    {{ $t('public.Cancel') }}
                 </Button>
 
                 <Button
@@ -229,7 +229,7 @@ const paginationActiveClass = [
                     :disabled="form.processing"
                     @click="addNewAccount"
                 >
-                    Process
+                    {{ $t('public.Process') }}
                 </Button>
             </div>
         </div>

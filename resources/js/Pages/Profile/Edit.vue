@@ -79,13 +79,13 @@ const closeModal = () => {
 </script>
 
 <template>
-    <AuthenticatedLayout title="Profile">
+    <AuthenticatedLayout :title="$t('public.Profile')">
         <template #header>
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-3">
                     <li>
                         <div class="flex items-center">
-                            <Link :href="route('profile.detail')" class="font-semibold text-xl text-gray-700 hover:text-[#FF9E23] dark:text-gray-200 leading-tight dark:hover:text-[#FF9E23]">User Profile</Link>
+                            <Link :href="route('profile.detail')" class="font-semibold text-xl text-gray-700 hover:text-[#FF9E23] dark:text-gray-200 leading-tight dark:hover:text-[#FF9E23]">{{ $t('public.sidebar.User Profile') }}</Link>
                         </div>
                     </li>
                     <li aria-current="page">
@@ -93,7 +93,7 @@ const closeModal = () => {
                             <svg class="w-3 h-3 text-gray-400 dark:text-white mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                             </svg>
-                            <span class="ml-1 mt-1 font-semibold text-xl text-[#FF9E23] md:ml-2 dark:text-[#FF9E23]">Edit Profile</span>
+                            <span class="ml-1 mt-1 font-semibold text-xl text-[#FF9E23] md:ml-2 dark:text-[#FF9E23]">{{ $t('public.Edit Profile') }}</span>
                         </div>
                     </li>
                 </ol>
@@ -105,7 +105,7 @@ const closeModal = () => {
                 <AvatarInput class="h-24 w-24 rounded-full" v-model="form.avatar" :default-src="avatar ? avatar : 'https://img.freepik.com/free-icon/user_318-159711.jpg'" />
             </div>
             <h2 class="text-xl font-medium text-gray-900 dark:text-gray-100">
-                Profile Information
+                {{ $t('public.Profile Information') }}
             </h2>
             <div
                 class="p-4 sm:p-8 bg-white dark:bg-dark-eval-1 shadow sm:rounded-lg"
@@ -113,7 +113,7 @@ const closeModal = () => {
                 <form>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="space-y-2">
-                            <Label for="first_name" value="Name" />
+                            <Label for="first_name" :value="$t('public.Name')" />
 
                             <Input
                                 id="first_name"
@@ -126,7 +126,7 @@ const closeModal = () => {
                             <InputError class="mt-2" :message="form.errors.first_name" />
                         </div>
                         <div class="space-y-2">
-                            <Label for="chinese_name" >Chinese Name</Label>
+                            <Label for="chinese_name" >{{ $t('public.Chinese Name') }}</Label>
 
                             <Input
                                 id="chinese_name"
@@ -141,14 +141,14 @@ const closeModal = () => {
 
 
                         <div class="space-y-2">
-                            <Label for="dob" value="Date Of Birth" />
+                            <Label for="dob" :value="$t('public.Date Of Birth')" />
                             <vue-tailwind-datepicker :formatter="formatter" as-single v-model="form.dob" input-classes="py-2 border-gray-400 w-full rounded-full text-sm placeholder:text-sm focus:border-gray-400 focus:ring focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-[#202020] dark:text-gray-300 dark:focus:ring-offset-dark-eval-1" />
 
                             <InputError class="mt-2" :message="form.errors.dob" />
                         </div>
 
                         <div class="space-y-2">
-                            <Label for="email" value="Email" />
+                            <Label for="email" :value="$t('public.Email')" />
 
                             <Input
                                 id="email"
@@ -163,7 +163,7 @@ const closeModal = () => {
                         </div>
 
                         <div class="space-y-2">
-                            <Label for="country" value="Country" />
+                            <Label for="country" :value="$t('public.Country')" />
 
                             <InputSelect v-model="selectedCountry" class="block w-full text-sm" placeholder="Choose Country">
                                 <option v-for="country in props.countries" :value="country.name_en" :key="country.id">{{ country.name_en }}</option>
@@ -174,7 +174,7 @@ const closeModal = () => {
 
 
                         <div class="space-y-2">
-                            <Label for="phone" value="Mobile Phone" />
+                            <Label for="phone" :value="$t('public.Mobile Phone')" />
 
                             <Input
                                 id="phone"
@@ -189,8 +189,8 @@ const closeModal = () => {
 
                         <div class="space-y-2" v-if="user.kyc_approval !== 'approve'">
                             <Label for="front_identity">
-                                Proof of Identity (FRONT)
-                                <a v-if="frontIdentity" href="javascript:void(0);" @click.prevent="openFrontIdentityModal" class="text-blue-500 hover:underline ml-2">Click to view</a>
+                                {{ $t('public.Proof of Identity (FRONT)') }}
+                                <a v-if="frontIdentity" href="javascript:void(0);" @click.prevent="openFrontIdentityModal" class="text-blue-500 hover:underline ml-2">{{ $t('public.Click to view') }}</a>
                             </Label>
                             <Modal :show="frontIdentityModal" @close="closeModal">
                                 <div class="relative bg-white rounded-lg shadow dark:bg-dark-eval-1">
@@ -201,7 +201,7 @@ const closeModal = () => {
                                         <span class="sr-only">Close modal</span>
                                     </button>
                                     <div class="px-6 py-6 lg:px-8">
-                                        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white"> Proof of Identity (Front)</h3>
+                                        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white"> {{ $t('public.Proof of Identity (Front)') }}</h3>
                                         <div class="flex justify-center">
                                             <img class="rounded" :src="frontIdentity" alt="Proof of Identity (Front)">
                                         </div>
@@ -219,8 +219,8 @@ const closeModal = () => {
 
                         <div class="space-y-2" v-if="user.kyc_approval !== 'approve'">
                             <Label for="back_identity">
-                                Proof of Identity (BACK)
-                                <a v-if="backIdentity" href="javascript:void(0);" @click.prevent="openBackIdentityModal" class="text-blue-500 hover:underline ml-2">Click to view</a>
+                                {{ $t('public.Proof of Identity (BACK)') }}
+                                <a v-if="backIdentity" href="javascript:void(0);" @click.prevent="openBackIdentityModal" class="text-blue-500 hover:underline ml-2">{{ $t('public.Click to view') }}</a>
                             </Label>
                             <Modal :show="backIdentityModal" @close="closeModal">
                                 <div class="relative bg-white rounded-lg shadow dark:bg-dark-eval-1">
@@ -231,7 +231,7 @@ const closeModal = () => {
                                         <span class="sr-only">Close modal</span>
                                     </button>
                                     <div class="px-6 py-6 lg:px-8">
-                                        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white"> Proof of Identity (Back)</h3>
+                                        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white"> {{ $t('public.Proof of Identity (Back)') }}</h3>
                                         <div class="flex justify-center">
                                             <img class="rounded" :src="backIdentity" alt="Proof of Identity (Back)">
                                         </div>
@@ -251,19 +251,19 @@ const closeModal = () => {
                     <div class="flex justify-end gap-4 mt-6">
                         <div class="grid grid-cols-2 gap-4 float-right">
                             <Button variant="danger" class="px-6 justify-center" @click.prevent="back">
-                                Cancel
+                                {{ $t('public.Cancel') }}
                             </Button>
-                            <Button class="justify-center" @click="submit" :disabled="form.processing">Save</Button>
+                            <Button class="justify-center" @click="submit" :disabled="form.processing">{{ $t('public.Save') }}</Button>
                         </div>
                     </div>
                 </form>
             </div>
 
-<!--            <div-->
-<!--                class="p-4 sm:p-8 bg-white dark:bg-dark-eval-1 shadow sm:rounded-lg"-->
-<!--            >-->
-<!--                <DeleteUserForm class="max-w-xl" />-->
-<!--            </div>-->
+            <!--            <div-->
+            <!--                class="p-4 sm:p-8 bg-white dark:bg-dark-eval-1 shadow sm:rounded-lg"-->
+            <!--            >-->
+            <!--                <DeleteUserForm class="max-w-xl" />-->
+            <!--            </div>-->
         </div>
     </AuthenticatedLayout>
 </template>

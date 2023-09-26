@@ -32,7 +32,7 @@ const back = () => {
 <template>
     <form>
         <div class="mb-6">
-            <Label for="type" value="Select a USDT protocol type " />
+            <Label for="type" :value="$t('public.Select a USDT protocol type') " />
             <ul class="my-4 grid w-full gap-6 grid-cols-2 md:grid-cols-4">
                 <li v-for="(crypto, index) in crypto_types" :key="index">
                     <input
@@ -58,14 +58,14 @@ const back = () => {
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="space-y-2">
-                <Label for="payment_account_name" value="USDT e-Wallet Name" />
+                <Label for="payment_account_name" :value="$t('public.USDT e-Wallet Name')" />
 
-                <Input id="payment_account_name" type="text" class="block w-full px-4" placeholder="example - BINANCE WALLET" v-model="form.payment_account_name" autocomplete="off" />
+                <Input id="payment_account_name" type="text" class="block w-full px-4" :placeholder="$t('public.example - BINANCE WALLET')" v-model="form.payment_account_name" autocomplete="off" />
                 <InputError :message="form.errors.payment_account_name"/>
 
             </div>
             <div class="space-y-2">
-                <Label for="account_no" value="Token Address" />
+                <Label for="account_no" :value="$t('public.Token Address')" />
 
                 <Input id="account_no" type="text" class="block w-full px-4" v-model="form.account_no" autocomplete="off" />
                 <InputError :message="form.errors.account_no"/>
@@ -75,9 +75,9 @@ const back = () => {
         <div class="flex justify-end gap-4 mt-6">
             <div class="grid grid-cols-2 gap-4 float-right">
                 <Button variant="danger" class="px-6 justify-center" @click.prevent="back">
-                    Cancel
+                    {{ $t('public.Cancel') }}
                 </Button>
-                <Button class="justify-center" @click="submit" :disabled="form.processing">Save</Button>
+                <Button class="justify-center" @click="submit" :disabled="form.processing">{{ $t('public.Save') }}</Button>
             </div>
         </div>
     </form>

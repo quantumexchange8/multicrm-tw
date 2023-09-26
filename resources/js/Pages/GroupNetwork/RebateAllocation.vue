@@ -53,11 +53,11 @@ function handleKeyDown(event) {
 </script>
 
 <template>
-    <AuthenticatedLayout title="Rebate Allocation">
+    <AuthenticatedLayout :title="$t('public.Rebate Allocation')">
         <template #header>
             <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <h2 class="text-xl font-semibold leading-tight">
-                    Rebate Allocation
+                    {{ $t('public.Rebate Allocation') }}
                 </h2>
             </div>
         </template>
@@ -74,28 +74,28 @@ function handleKeyDown(event) {
                     <span class="text-sm text-gray-500 dark:text-gray-400">{{ ib.of_user.ib_id }}</span>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-center md:text-left">
-                    <div class="text-black dark:text-dark-eval-3">Account type:</div>
+                    <div class="text-black dark:text-dark-eval-3">{{ $t('public.Account Type') }}:</div>
                     <div class="text-black dark:text-white">{{ ib.account_type.name }}</div>
 
-                    <div class="text-black dark:text-dark-eval-3">Since Date </div>
+                    <div class="text-black dark:text-dark-eval-3">{{ $t('public.Since Date') }} </div>
                     <div class="text-black dark:text-white">{{ formatDate(ib.created_at) }}</div>
 
-                    <div class="text-black dark:text-dark-eval-3">Direct IB </div>
+                    <div class="text-black dark:text-dark-eval-3">{{ $t('public.Direct IB') }} </div>
                     <div class="text-black dark:text-white">{{ ib.of_user.direct_ib }}</div>
 
-                    <div class="text-black dark:text-dark-eval-3">Direct Clients </div>
+                    <div class="text-black dark:text-dark-eval-3">{{ $t('public.Direct Clients') }} </div>
                     <div class="text-black dark:text-white">{{ ib.of_user.direct_client }}</div>
 
-                    <div class="text-black dark:text-dark-eval-3">Total Group IB </div>
+                    <div class="text-black dark:text-dark-eval-3">{{ $t('public.Total Group IB') }} </div>
                     <div class="text-black dark:text-white">{{ ib.of_user.total_ib }}</div>
 
-                    <div class="text-black dark:text-dark-eval-3">Total Group Clients </div>
+                    <div class="text-black dark:text-dark-eval-3">{{ $t('public.Total Group Clients') }} </div>
                     <div class="text-black dark:text-white">{{ ib.of_user.total_client }}</div>
                 </div>
             </div>
             <div class="w-full bg-white rounded-lg shadow dark:bg-dark-eval-1 p-6">
                 <div class="flex flex-col text-center md:text-left">
-                    <h5 class="mb-6 text-xl font-medium text-gray-900 dark:text-white">My Rebate Info</h5>
+                    <h5 class="mb-6 text-xl font-medium text-gray-900 dark:text-white">{{ $t('public.My Rebate Info') }}</h5>
                     <div
                         v-for="account in ib.symbol_groups"
                         class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"
@@ -127,7 +127,7 @@ function handleKeyDown(event) {
                             aria-hidden="true"
                         />
                     </template>
-                    <Input withIcon id="name" type="text" placeholder="Name / Email" class="block w-full" v-model="search" @keydown="handleKeyDown" />
+                    <Input withIcon id="name" type="text" :placeholder="$t('public.Name / Email')" class="block w-full" v-model="search" @keydown="handleKeyDown" />
                 </InputIconWrapper>
                 <button type="submit" class="absolute right-1 bottom-2 py-2.5 text-gray-500 hover:text-dark-eval-4 font-medium rounded-full w-8 h-8 text-sm"><font-awesome-icon
                     icon="fa-solid fa-x"

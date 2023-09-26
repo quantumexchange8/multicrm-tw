@@ -96,7 +96,7 @@ const getMediaUrlByCollection = (announcement, collectionName) => {
         </div>
 
         <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
-            Welcome back! {{ $page.props.auth.user.first_name }}
+            {{ $t('public.Welcome back!') }} {{ $page.props.auth.user.first_name }}
         </div>
 
     </AuthenticatedLayout>

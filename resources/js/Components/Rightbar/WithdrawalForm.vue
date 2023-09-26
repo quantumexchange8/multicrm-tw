@@ -67,17 +67,17 @@ const closeModal = () => {
 
 <template>
     <Button class="w-full justify-center" variant="danger-opacity" @click="openWithdrawalModal">
-        Withdrawal
+        {{ $t('public.Withdrawal') }}
     </Button>
 
     <Modal :show="submitWithdrawal" @close="closeModal">
 
         <form class="p-6">
             <div v-if="!form.channel">
-                <h2 class="text-lg mb-2 font-medium text-gray-900 dark:text-gray-100">Withdrawal Method</h2>
+                <h2 class="text-lg mb-2 font-medium text-gray-900 dark:text-gray-100">{{ $t('public.Withdrawal Method') }}</h2>
                 <hr>
                 <p class="my-4 text-sm text-gray-600 dark:text-gray-400">
-                    <span class="text-red-500">*</span> Select a withdrawal method
+                    <span class="text-red-500">*</span> {{ $t('public.rightbar.Select a withdrawal method') }}
                 </p>
                 <ul class="my-4 grid w-full gap-6" :class="{'md:grid-cols-3': channels.length >= 3, 'md:grid-cols-2': channels.length === 2}">
                     <li v-for="(channel, index) in channels" :key="index">
@@ -96,7 +96,7 @@ const closeModal = () => {
                         >
                             <div class="flex flex-col items-center gap-2">
                                 <img class="object-cover" :src="channel.src" alt="account_platform">
-                                <p class="dark:text-white">{{ channel.name }}</p>
+                                <p class="dark:text-white">{{ $t('public.' + channel.name) }}</p>
                             </div>
                         </label>
                     </li>
@@ -107,18 +107,18 @@ const closeModal = () => {
 
             <!-- Crypto -->
             <div v-if="form.channel === 'crypto'">
-                <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Withdrawal - Cryptocurrency</h2>
+                <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $t('public.rightbar.Withdrawal - Cryptocurrency') }}</h2>
                 <hr>
                 <div class="grid grid-cols-1 my-8 gap-2 w-full text-center">
-                    <p class="text-base dark:text-gray-400">Cash Wallet Balance</p>
+                    <p class="text-base dark:text-gray-400">{{ $t('public.rightbar.Cash Wallet Balance') }}</p>
                     <p class="text-4xl font-bold dark:text-white">$ {{ $page.props.auth.user.cash_wallet }}</p>
                 </div>
                 <div class="grid grid-cols-1 gap-6" v-if="getAccountWallets.original.cryptoAccounts.length > 0">
                     <div class="space-y-2">
 
-                        <Label for="account_no" value="Withdraw to Cryptocurrency Account " />
+                        <Label for="account_no" :value="$t('public.rightbar.Withdraw to Cryptocurrency Account')" />
 
-                        <InputSelect v-model="form.account_no" class="block w-full text-sm" placeholder="Select cryptocurrency account">
+                        <InputSelect v-model="form.account_no" class="block w-full text-sm" :placeholder="$t('public.rightbar.Select cryptocurrency account')">
                             <option v-for="cryptoAccount in getAccountWallets.original.cryptoAccounts" :value="cryptoAccount.account_no" :key="cryptoAccount.id">{{ cryptoAccount.payment_platform_name }} - {{ cryptoAccount.account_no }}</option>
                         </InputSelect>
 
@@ -127,17 +127,17 @@ const closeModal = () => {
                     </div>
 
                     <div class="space-y-2">
-                        <Label for="amount" value="Withdrawal Amount" />
+                        <Label for="amount" :value="$t('public.rightbar.Withdrawal Amount')" />
 
-                        <Input id="amount" type="number" min="30" class="block w-full px-4" placeholder="At least $ 30.00" v-model="form.amount" @change="form.validate('amount')" autocomplete="off" />
+                        <Input id="amount" type="number" min="30" class="block w-full px-4" :placeholder="$t('public.rightbar.At least') + ' $ 30.00'" v-model="form.amount" @change="form.validate('amount')" autocomplete="off" />
                         <InputError :message="form.errors.amount"/>
 
                     </div>
                 </div>
                 <div v-else class="mt-4 text-center">
-                    <p class="text-gray-500 dark:text-gray-400">Don't have an account?
+                    <p class="text-gray-500 dark:text-gray-400">{{ $t("public.Don't have an account") }}
                         <Link :href="route('profile.detail')" class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                            Click to Create
+                            {{ $t('public.rightbar.Click to Create') }}
                             <svg class="w-4 h-4 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                             </svg>
@@ -149,7 +149,7 @@ const closeModal = () => {
                 <h3 class="list-decimal list-inside text-xl text-dark-eval-4">{{ $t('public.Terms and Conditions') }}</h3>
                 <ol class="list-decimal list-inside text-sm text-dark-eval-4">
                     <li>
-                        {{ $t("public.Withdrawal Acknowledgement 1", { company: 'QCG'}) }}
+                        {{ $t("public.Withdrawal Acknowledgement 1", { company: 'QCG', company_2: 'QCG'}) }}
                     </li>
                     <li>
                         {{ $t("public.Withdrawal Acknowledgement 2", { company: 'QCG'}) }}
@@ -194,7 +194,7 @@ const closeModal = () => {
             <InputError :message="form.errors.terms"/>
             <div class="mt-6 flex justify-end" v-if="form.channel">
                 <Button variant="secondary" @click="closeModal">
-                    Cancel
+                    {{ $t('public.Cancel')}}
                 </Button>
 
                 <Button
@@ -204,7 +204,7 @@ const closeModal = () => {
                     :disabled="form.processing"
                     @click="submit"
                 >
-                    Submit
+                    {{ $t('public.Submit')}}
                 </Button>
             </div>
         </form>

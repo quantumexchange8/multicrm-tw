@@ -69,7 +69,7 @@ const closeModal = () => {
         @click="addTradingAccount"
     >
         <PlusCircleIcon aria-hidden="true" :class="iconSizeClasses" />
-        <span>Add Trading Account</span>
+        <span>{{ $t('public.Add Trading Account') }}</span>
     </Button>
 
     <Modal :show="addingTradingAccount" @close="closeModal">
@@ -77,11 +77,11 @@ const closeModal = () => {
             <h2
                 class="text-lg font-medium mb-2 text-gray-900 dark:text-gray-100"
             >
-                Add Trading Account
+                {{ $t('public.Add Trading Account') }}
             </h2>
             <hr>
             <div class="mt-6 space-y-2">
-                <Label for="group" value="Select Account Type" />
+                <Label for="group" :value="$t('public.Select Account Type')" />
                 <ul class="grid w-full gap-6 md:grid-cols-3">
                     <li v-for="(type, index) in acc_types" :key="index">
                         <input type="radio" :id="type.id" name="group" :value="accountTypes.id" class="hidden peer" v-model="form.group" :required="type.required">
@@ -111,8 +111,8 @@ const closeModal = () => {
             <!--                        </div>-->
 
             <div class="mt-6 space-y-2">
-                <Label for="leverage" value="Trading Account Leverage" />
-                <InputSelect v-model="form.leverage" class="block w-full text-sm" placeholder="Choose Leverages">
+                <Label for="leverage" :value="$t('public.Trading Account Leverage')" />
+                <InputSelect v-model="form.leverage" class="block w-full text-sm" :placeholder="$t('public.Choose Leverage')">
                     <option v-for="leverage in leverages" :value="leverage.value" :key="leverage.id">{{ leverage.leverage }}</option>
                 </InputSelect>
                 <InputError :message="form.errors.leverage"/>
@@ -120,23 +120,23 @@ const closeModal = () => {
 
             <div class="mt-6 space-y-2">
                 <Label for="currency" value="Currency" />
-                <InputSelect v-model="form.currency" class="block w-full text-sm" placeholder="Choose Currency">
+                <InputSelect v-model="form.currency" class="block w-full text-sm" :placeholder="$t('public.Choose Currency')">
                     <option value="USD">USD</option>
                 </InputSelect>
                 <InputError :message="form.errors.leverage"/>
             </div>
 
             <div class="mt-6 space-y-4">
-                <h3 class="text-[#989898] font-bold">Terms & Conditions</h3>
+                <h3 class="text-[#989898] font-bold">{{ $t('public.Terms & Conditions') }}</h3>
                 <ol class="text-[#989898] text-sm list-decimal text-justify pl-6 mt-2">
-                    <li>I acknowledge I have read and understood the Risk Warning Notice which is provided online as part of this application. I understand that Key Information Documents are available to me on the Quantum Capital Global (“Quantum Capital Global”) website.</li>
-                    <li>I acknowledge that I have read, understood and accept the Client Agreement provided online as part of this application.</li>
-                    <li>I understand that Quantum Capital Global will not provide me with any investment advice on transactions entered into on its platform(s).</li>
-                    <li>I also confirm that I have read, understood and agree to be bound by Quantum Capital Global Privacy Policy.</li>
-                    <li>I understand that personal information submitted as part of this application will be used to verify my identity with a third-party authentication service.</li>
-                    <li>I confirm that the information provided by me and inserted in this form is correct and that I acknowledge that I shall be obliged to inform Quantum Capital Global immediately in case of any changes to this information.</li>
-                    <li>I confirm that I have acted in my own name as specified in this application and not on behalf of a third party in respect of all matters related to this client relationship. Accordingly, all funds to be deposited and traded in on the account with Quantum Capital Global are my own funds.</li>
-                    <li>I have read, understood and agreed to be bound by Quantum Capital Global's Deposit And Withdrawals Policy.</li>
+                    <li>{{ $t('public.Terms 1') }}</li>
+                    <li>{{ $t('public.Terms 2') }}</li>
+                    <li>{{ $t('public.Terms 3') }}</li>
+                    <li>{{ $t('public.Terms 4') }}</li>
+                    <li>{{ $t('public.Terms 5') }}</li>
+                    <li>{{ $t('public.Terms 6') }}</li>
+                    <li>{{ $t('public.Terms 7') }}</li>
+                    <li>{{ $t('public.Terms 8') }}</li>
                 </ol>
 
                 <div class="flex items-start">
@@ -144,7 +144,7 @@ const closeModal = () => {
                         <Checkbox v-model="form.terms"/>
                     </div>
                     <div class="ml-3">
-                        <label for="terms" class="text-gray-500 dark:text-dark-eval-4">I acknowledge that I have read, and do hereby accept the terms and conditions stated as above.</label>
+                        <label for="terms" class="text-gray-500 dark:text-dark-eval-4">{{ $t('public.I acknowledge that I have read, and do hereby accept the terms and conditions stated as above.') }}</label>
                     </div>
                 </div>
                 <InputError :message="form.errors.terms"/>
@@ -153,7 +153,7 @@ const closeModal = () => {
 
             <div class="mt-6 flex justify-end">
                 <Button variant="secondary" @click="closeModal">
-                    Cancel
+                    {{ $t('public.Cancel') }}
                 </Button>
 
                 <Button
@@ -163,7 +163,7 @@ const closeModal = () => {
                     :disabled="form.processing"
                     @click="addNewAccount"
                 >
-                    Process
+                    {{ $t('public.Process') }}
                 </Button>
             </div>
         </div>

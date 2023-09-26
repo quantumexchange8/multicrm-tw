@@ -48,64 +48,64 @@ class RegisteredUserController extends Controller
 
     public function firstStep(Request $request)
     {
-//        $rules = [
-//            'email' => 'required|string|email|max:255|unique:' . User::class,
-//            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:8',
-//            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-//        ];
-//
-//        $attributes = [
-//            'email' => 'Email',
-//            'phone' => 'Mobile',
-//            'password' => 'Password',
-//        ];
-//
-//        $validator = Validator::make($request->all(), $rules);
-//        $validator->setAttributeNames($attributes);
-//
-//        if ($request->form_step == 1) {
-//            $validator->validate();
-//        } elseif ($request->form_step == 2) {
-//            $additionalRules = [
-//                'first_name' => 'required|regex:/^[a-zA-Z0-9\p{Han}. ]+$/u|max:255',
-//                'chinese_name' => 'nullable|regex:/^[a-zA-Z0-9\p{Han}. ]+$/u',
-//                'dob' => 'required',
-//                'country' => 'required'
-//            ];
-//            $rules = array_merge($rules, $additionalRules);
-//
-//            $additionalAttributes = [
-//                'first_name' => 'Full Name',
-//                'chinese_name' => 'Chinese Name',
-//                'dob' => 'Date of Birth',
-//                'country' => 'Country',
-//            ];
-//            $attributes = array_merge($attributes, $additionalAttributes);
-//
-//            $validator = Validator::make($request->all(), $rules);
-//            $validator->setAttributeNames($attributes);
-//            $validator->validate();
-//        } elseif ($request->form_step == 3) {
-//            $additionalRules = [
-//                'account_platform' => 'required',
-//                'account_type' => 'required',
-//                'leverage' => 'required',
-//            ];
-//            $rules = array_merge($rules, $additionalRules);
-//
-//            $additionalAttributes = [
-//                'account_platform' => 'Account Platform',
-//                'account_type' => 'Account Type',
-//                'leverage' => 'Leverage',
-//            ];
-//            $attributes = array_merge($attributes, $additionalAttributes);
-//
-//            $validator = Validator::make($request->all(), $rules);
-//            $validator->setAttributeNames($attributes);
-//            $validator->validate();
-//        }
-//
-//        return to_route('register');
+        $rules = [
+            'email' => 'required|string|email|max:255|unique:' . User::class,
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:8',
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ];
+
+        $attributes = [
+            'email' => 'Email',
+            'phone' => 'Mobile',
+            'password' => 'Password',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        $validator->setAttributeNames($attributes);
+
+        if ($request->form_step == 1) {
+            $validator->validate();
+        } elseif ($request->form_step == 2) {
+            $additionalRules = [
+                'first_name' => 'required|regex:/^[a-zA-Z0-9\p{Han}. ]+$/u|max:255',
+                'chinese_name' => 'nullable|regex:/^[a-zA-Z0-9\p{Han}. ]+$/u',
+                'dob' => 'required',
+                'country' => 'required'
+            ];
+            $rules = array_merge($rules, $additionalRules);
+
+            $additionalAttributes = [
+                'first_name' => 'Full Name',
+                'chinese_name' => 'Chinese Name',
+                'dob' => 'Date of Birth',
+                'country' => 'Country',
+            ];
+            $attributes = array_merge($attributes, $additionalAttributes);
+
+            $validator = Validator::make($request->all(), $rules);
+            $validator->setAttributeNames($attributes);
+            $validator->validate();
+        } elseif ($request->form_step == 3) {
+            $additionalRules = [
+                'account_platform' => 'required',
+                'account_type' => 'required',
+                'leverage' => 'required',
+            ];
+            $rules = array_merge($rules, $additionalRules);
+
+            $additionalAttributes = [
+                'account_platform' => 'Account Platform',
+                'account_type' => 'Account Type',
+                'leverage' => 'Leverage',
+            ];
+            $attributes = array_merge($attributes, $additionalAttributes);
+
+            $validator = Validator::make($request->all(), $rules);
+            $validator->setAttributeNames($attributes);
+            $validator->validate();
+        }
+
+        return to_route('register');
     }
 
     /**

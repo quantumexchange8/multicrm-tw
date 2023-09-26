@@ -12,11 +12,11 @@ const setActiveComponent = (component) => {
 </script>
 
 <template>
-    <AuthenticatedLayout title="Report">
+    <AuthenticatedLayout :title="$t('public.sidebar.Report')">
         <template #header>
             <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <h2 class="text-xl font-semibold leading-tight">
-                    Report
+                    {{ $t('public.sidebar.Report') }}
                 </h2>
             </div>
         </template>
@@ -28,7 +28,7 @@ const setActiveComponent = (component) => {
                 :class="{ 'bg-transparent': activeComponent !== 'ib_rebate', 'dark:bg-[#007BFF] dark:text-white': activeComponent === 'ib_rebate' }"
                 @click="setActiveComponent('ib_rebate')"
             >
-                IB Rebate Report
+                {{ $t('public.IB Rebate Report') }}
             </Button>
         </div>
 

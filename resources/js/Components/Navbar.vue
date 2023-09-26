@@ -27,7 +27,7 @@ import DropdownLink from '@/Components/DropdownLink.vue'
 import { LangIconDark, LangIconWhite } from '@/Components/Icons/outline'
 import toast from "@/Composables/toast.js";
 import Modal from "@/Components/Modal.vue";
-import {loadLanguageAsync} from "laravel-vue-i18n";
+import {loadLanguageAsync, trans} from "laravel-vue-i18n";
 
 onMounted(() => {
     document.addEventListener('scroll', handleScroll)
@@ -52,7 +52,7 @@ function copyReferralCode() {
     document.body.removeChild(tempInput);
 
     toast.add({
-        message: "Copy Successful!",
+        message: trans('public.Copy Successful!'),
     });
 }
 
@@ -238,7 +238,7 @@ const changeLanguage = async (langVal) => {
                         </div>
                     </DropdownLink>
                     <DropdownLink v-if="$page.props.auth.user.notifications.length === 0" class="border-b-2 border-dark-eval-3">
-                        <div class="dark:text-dark-eval-5">No notifications</div>
+                        <div class="dark:text-dark-eval-5">{{ $t('public.No notifications') }}</div>
                     </DropdownLink>
                 </template>
             </Dropdown>
@@ -286,7 +286,7 @@ const changeLanguage = async (langVal) => {
                     <DropdownLink
                         :href="route('profile.edit')"
                     >
-                        Profile
+                        {{ $t('public.Profile') }}
                     </DropdownLink>
 
                     <DropdownLink
@@ -294,7 +294,7 @@ const changeLanguage = async (langVal) => {
                         method="post"
                         as="button"
                     >
-                        Log Out
+                        {{ $t('public.Log Out') }}
                     </DropdownLink>
 
                     <hr class="h-px my-1 bg-gray-200 border-0 dark:bg-gray-700">
@@ -305,9 +305,9 @@ const changeLanguage = async (langVal) => {
                         class="grid grid-cols-1 text-center dark:hover:bg-transparent"
                         @click.stop.prevent="copyReferralCode"
                     >
-                        <p class="text-xs my-2 text-gray-500 dark:text-dark-eval-4">Promote Register Code</p>
-                        <span id="userReferralCode" class="text-white">{{ user.referral_code }}</span>
-                        <Button class="w-full justify-center my-2" @click.stop.prevent="copyReferralCode">Copy</Button>
+                        <p class="text-xs my-2 text-gray-500 dark:text-dark-eval-4">{{ $t('public.Promote Register Code') }}</p>
+                        <span id="userReferralCode" class="text-gray-500 dark:text-white">{{ user.referral_code }}</span>
+                        <Button class="w-full justify-center my-2" @click.stop.prevent="copyReferralCode">{{ $t('public.Copy') }}</Button>
                     </DropdownLink>
                 </template>
             </Dropdown>
@@ -371,7 +371,7 @@ const changeLanguage = async (langVal) => {
                 <span class="sr-only">Close modal</span>
             </button>
             <div class="px-6 py-6 lg:px-8 space-y-4 text-gray-500 dark:text-dark-eval-4">
-                <h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white">Notification</h3>
+                <h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white">{{ $t('public.Notification') }}</h3>
                 <hr>
                 <div class="dark:text-white">{{ notificationContent.data['title'] }}</div>
                 <div class="dark:text-white text-sm" v-html="notificationContent.data['content']"></div>

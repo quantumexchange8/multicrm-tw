@@ -58,7 +58,7 @@ function copyTestingCode () {
         var successful = document.execCommand('copy');
         if (successful) {
             toast.add({
-                message: "Copy Successfully!",
+                message: trans('public.Copy Successful!'),
             });
         } else {
             alert('Try again later')

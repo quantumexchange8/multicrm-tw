@@ -118,7 +118,7 @@ const paginationActiveClass = [
     <form @submit.prevent="submitSearch">
         <div class="my-6 grid grid-cols-1 md:grid-cols-3 gap-4">
             <div class="space-y-2">
-                <Label>Filter By</Label>
+                <Label>{{ $t('public.Filter By') }}</Label>
                 <vue-tailwind-datepicker
                     :formatter="formatter"
                     v-model="date"
@@ -126,7 +126,7 @@ const paginationActiveClass = [
                 />
             </div>
             <div class="space-y-2">
-                <Label>Search By Client Name / Acc No</Label>
+                <Label>{{ $t('public.Search By Client Name / Acc No') }}.</Label>
                 <div class="relative w-full">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -157,14 +157,14 @@ const paginationActiveClass = [
                         variant="primary-opacity"
                         class="justify-center py-3"
                     >
-                        Search
+                        {{ $t('public.Search') }}
                     </Button>
                     <Button
                         variant="danger-opacity"
                         class="justify-center py-3"
                         @click.prevent="reset"
                     >
-                        Reset
+                        {{ $t('public.Reset') }}
                     </Button>
                 </div>
             </div>
@@ -174,7 +174,7 @@ const paginationActiveClass = [
                     class="justify-center w-full md:w-1/4 py-3"
                     @click.prevent="exportDeposit"
                 >
-                    Export
+                    {{ $t('public.Export') }}
                 </Button>
             </div>
         </div>
@@ -198,45 +198,39 @@ const paginationActiveClass = [
                 <thead class="text-xs font-bold text-gray-700 uppercase bg-gray-50 dark:bg-transparent dark:text-white text-center">
                 <tr>
                     <th scope="col" class="px-4 py-3">
-                        Date
+                        {{ $t('public.Acc No')}}.
                     </th>
                     <th scope="col" class="px-4 py-3">
-                        Acc No.
+                        {{ $t('public.Acc Type')}}
                     </th>
                     <th scope="col" class="px-4 py-3">
-                        Acc Type
+                        {{ $t('public.Client Name')}}
                     </th>
                     <th scope="col" class="px-4 py-3">
-                        Client Name
+                        {{ $t('public.Symbol')}}
                     </th>
                     <th scope="col" class="px-4 py-3">
-                        Symbol
+                        {{ $t('public.Volume (Lot)')}}
                     </th>
                     <th scope="col" class="px-4 py-3">
-                        Volume (Lot)
+                        {{ $t('public.Rebate / Lot')}}
                     </th>
                     <th scope="col" class="px-4 py-3">
-                        Rebate / Lot
+                        {{ $t('public.Ticket No')}}.
                     </th>
                     <th scope="col" class="px-4 py-3">
-                        Ticket No.
-                    </th>
-                    <th scope="col" class="px-4 py-3">
-                        Rebate
+                        {{ $t('public.Rebate')}}
                     </th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-if="ibRebateReport.data.length === 0">
                     <th colspan="8" class="py-4 text-lg text-center">
-                        No Rebate History
+                        {{ $t('public.No Rebate History')}}
                     </th>
                 </tr>
                 <tr v-for="rebate in ibRebateReport.data" :key="rebate.id" class="bg-white even:dark:bg-transparent odd:dark:bg-dark-eval-0 text-xs font-thin text-gray-900 dark:text-white text-center">
                     <th scope="row" class="px-6 py-4 font-thin rounded-l-full">
-                        {{ formatDate(rebate.closed_time) }}
-                    </th>
-                    <th class="px-6 py-4">
                         {{ rebate.meta_login }}
                     </th>
                     <th class="px-6 py-4">
@@ -264,7 +258,7 @@ const paginationActiveClass = [
                 </tbody>
             </table>
             <div class="ml-1 my-4 text-xl text-right" v-if="!isLoading">
-                Total Rebate: $ {{ formatAmount(ibTotalRebate) }}
+                {{ $t('public.Total Rebate')}}: $ {{ formatAmount(ibTotalRebate) }}
             </div>
             <div class="flex justify-end mt-4" v-if="!isLoading">
                 <TailwindPagination

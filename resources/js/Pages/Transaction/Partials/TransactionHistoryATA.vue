@@ -91,7 +91,7 @@ const paginationActiveClass = [
     <form @submit.prevent="submitSearch">
         <div class="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
             <div class="space-y-2">
-                <Label>Filter By Date</Label>
+                <Label>{{ $t('public.Filter By Date') }}</Label>
                 <vue-tailwind-datepicker
                     v-model="date"
                     :formatter="formatter"
@@ -99,7 +99,7 @@ const paginationActiveClass = [
                 />
             </div>
             <div class="space-y-2">
-                <Label>Search By Account No</Label>
+                <Label>{{ $t('public.Search By Account No') }}</Label>
                 <div class="relative w-full">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -131,14 +131,14 @@ const paginationActiveClass = [
                         variant="primary-opacity"
                         class="justify-center py-3"
                     >
-                        Search
+                        {{ $t('public.Search') }}
                     </Button>
                     <Button
                         variant="danger-opacity"
                         class="justify-center py-3"
                         @click.prevent="reset"
                     >
-                        Reset
+                        {{ $t('public.Reset')}}
                     </Button>
                 </div>
             </div>
@@ -153,19 +153,19 @@ const paginationActiveClass = [
                 <thead class="text-xs font-bold text-gray-700 uppercase bg-gray-50 dark:bg-transparent dark:text-white text-center">
                 <tr>
                     <th scope="col" class="px-4 py-3">
-                        Date
+                        {{ $t('public.Date')}}
                     </th>
                     <th scope="col" class="px-4 py-3">
-                        From Account No.
+                        {{ $t('public.From Account No') }}
                     </th>
                     <th scope="col" class="px-4 py-3">
-                        To Account No.
+                        {{ $t('public.To Account No')}}
                     </th>
                     <th scope="col" class="px-4 py-3">
-                        Amount
+                        {{ $t('public.Amount')}}
                     </th>
                     <th scope="col" class="px-4 py-3">
-                        Status
+                        {{ $t('public.Status')}}
                     </th>
                 </tr>
                 </thead>
@@ -184,7 +184,7 @@ const paginationActiveClass = [
                         $ {{ formatAmount(accountToAccount.amount) }}
                     </th>
                     <th class="px-6 py-2 font-thin rounded-r-full">
-                        <Badge :status="getStatusClass(accountToAccount.status)">{{ accountToAccount.status }}</Badge>
+                        <Badge :status="getStatusClass(accountToAccount.status)">{{ $t('public.' + accountToAccount.status) }}</Badge>
                     </th>
                 </tr>
                 </tbody>

@@ -42,12 +42,12 @@ const closeModal = () => {
 </script>
 
 <template>
-    <AuthenticatedLayout title="User Profile">
+    <AuthenticatedLayout :title="$t('public.sidebar.User Profile')">
         <template #header>
             <h2
                 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight"
             >
-                User Profile
+                {{ $t('public.sidebar.User Profile') }}
             </h2>
         </template>
 
@@ -60,22 +60,22 @@ const closeModal = () => {
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <Link
                     :href="route('profile.edit')"
-                    class="inline-flex p-2 px-6 justify-center text-center items-center transition-colors text-sm font-medium rounded-full select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-[#007bff33] text-[#007BFF] hover:bg-blue-800 hover:text-white hover:text-white focus:ring-blue-500"
+                    class="inline-flex p-2 px-6 justify-center text-center items-center transition-colors text-sm font-medium rounded-full select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-[#007bff33] text-[#007BFF] hover:bg-blue-800 hover:text-white focus:ring-blue-500"
                 >
-                    Edit Profile
+                    {{ $t('public.Edit Profile') }}
                 </Link>
                 <Button
                     variant="primary-opacity"
                     class="justify-center"
                     @click="openResetPasswordModal"
                 >
-                    Reset Portal Password
+                    {{ $t('public.Reset Portal Password') }}
                 </Button>
                 <Link
                     :href="route('profile.payment_account')"
-                    class="inline-flex p-2 px-6 justify-center text-center items-center transition-colors text-sm font-medium rounded-full select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-[#007bff33] text-[#007BFF] hover:bg-blue-800 hover:text-white hover:text-white focus:ring-blue-500"
+                    class="inline-flex p-2 px-6 justify-center text-center items-center transition-colors text-sm font-medium rounded-full select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-[#007bff33] text-[#007BFF] hover:bg-blue-800 hover:text-white focus:ring-blue-500"
                 >
-                    Create Payment Account
+                    {{ $t('public.Create Payment Account') }}
                 </Link>
             </div>
         </div>
@@ -84,12 +84,12 @@ const closeModal = () => {
             <h2
                 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight mb-4"
             >
-                Personal Information
+                {{ $t('public.Personal Information') }}
             </h2>
             <div class="p-4 sm:p-8 bg-white dark:bg-dark-eval-1 shadow sm:rounded-lg">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="space-y-2">
-                        <Label for="first_name">Full Name</Label>
+                        <Label for="first_name">{{ $t('public.Full Name') }}</Label>
 
                         <Input
                             id="first_name"
@@ -101,7 +101,7 @@ const closeModal = () => {
 
                     </div>
                     <div class="space-y-2">
-                        <Label for="chinese_name">Chinese Name</Label>
+                        <Label for="chinese_name">{{ $t('public.Chinese Name') }}</Label>
 
                         <Input
                             id="chinese_name"
@@ -113,7 +113,7 @@ const closeModal = () => {
 
                     </div>
                     <div class="space-y-2">
-                        <Label for="dob">Date Of Birth</Label>
+                        <Label for="dob">{{ $t('public.Date Of Birth') }}</Label>
 
                         <Input
                             id="dob"
@@ -125,7 +125,7 @@ const closeModal = () => {
 
                     </div>
                     <div class="space-y-2">
-                        <Label for="email">Email</Label>
+                        <Label for="email">{{ $t('public.Email') }}</Label>
 
                         <Input
                             id="email"
@@ -137,7 +137,7 @@ const closeModal = () => {
 
                     </div>
                     <div class="space-y-2">
-                        <Label for="country">Country</Label>
+                        <Label for="country">{{ $t('public.Country') }}</Label>
 
                         <Input
                             id="country"
@@ -149,7 +149,7 @@ const closeModal = () => {
 
                     </div>
                     <div class="space-y-2">
-                        <Label for="phone">Mobile Phone</Label>
+                        <Label for="phone">{{ $t('public.Mobile Phone') }}</Label>
 
                         <Input
                             id="phone"
@@ -161,7 +161,7 @@ const closeModal = () => {
 
                     </div>
                     <div class="space-y-2">
-                        <Label for="front_identity">Proof of Identity (FRONT)</Label>
+                        <Label for="front_identity">{{ $t('public.Proof of Identity (FRONT)') }}</Label>
 
                         <Input
                             v-if="frontIdentity"
@@ -190,7 +190,7 @@ const closeModal = () => {
                                     <span class="sr-only">Close modal</span>
                                 </button>
                                 <div class="px-6 py-6 lg:px-8">
-                                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white"> Proof of Identity (Front)</h3>
+                                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white"> {{ $t('public.Proof of Identity (Front)') }}</h3>
                                     <div class="flex justify-center">
                                         <img class="rounded" :src="frontIdentity" alt="Proof of Identity (Front)">
                                     </div>
@@ -199,7 +199,7 @@ const closeModal = () => {
                         </Modal>
                     </div>
                     <div class="space-y-2">
-                        <Label for="back_identity">Proof of Identity (BACK)</Label>
+                        <Label for="back_identity">{{ $t('public.Proof of Identity (BACK)') }}</Label>
                         <Input
                             v-if="backIdentity"
                             id="back_identity"
@@ -227,7 +227,7 @@ const closeModal = () => {
                                     <span class="sr-only">Close modal</span>
                                 </button>
                                 <div class="px-6 py-6 lg:px-8">
-                                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white"> Proof of Identity (Back)</h3>
+                                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white"> {{ $t('public.Proof of Identity (Back)') }}</h3>
                                     <div class="flex justify-center">
                                         <img class="rounded" :src="backIdentity" alt="Proof of Identity (Back)">
                                     </div>
@@ -245,7 +245,7 @@ const closeModal = () => {
             <h2
                 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight mb-4"
             >
-                Payment Account
+                {{ $t('public.Payment Account') }}
             </h2>
             <CryptoAccountList />
         </div>
@@ -259,7 +259,7 @@ const closeModal = () => {
                     <span class="sr-only">Close modal</span>
                 </button>
                 <div class="px-6 py-6 lg:px-8">
-                    <h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white">Reset Portal Password</h3>
+                    <h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white">{{ $t('public.Reset Portal Password') }}</h3>
                     <hr>
 
                     <UpdatePasswordForm

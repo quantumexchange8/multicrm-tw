@@ -69,11 +69,11 @@ function handleKeyDown(event) {
 </script>
 
 <template>
-    <AuthenticatedLayout title="Network Tree">
+    <AuthenticatedLayout :title="$t('public.Network Tree')">
         <template #header>
             <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <h2 class="text-xl font-semibold leading-tight">
-                    Member Tree
+                    {{ $t('public.Member Tree') }}
                 </h2>
             </div>
         </template>
@@ -94,7 +94,7 @@ function handleKeyDown(event) {
                                 aria-hidden="true"
                             />
                         </template>
-                        <Input withIcon id="name" type="text" placeholder="Name / Email" class="block w-full" v-model="search" @keydown="handleKeyDown" />
+                        <Input withIcon id="name" type="text" :placeholder="$t('public.Name / Email')" class="block w-full" v-model="search" @keydown="handleKeyDown" />
                     </InputIconWrapper>
                     <button type="submit" class="absolute right-1 bottom-2 py-2.5 text-gray-500 hover:text-dark-eval-4 font-medium rounded-full w-8 h-8 text-sm"><font-awesome-icon
                         icon="fa-solid fa-x"

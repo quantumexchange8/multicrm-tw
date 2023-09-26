@@ -30,22 +30,22 @@ function formatDate(date) {
                     <span class="text-sm text-gray-500 dark:text-gray-400">{{ child.of_user.ib_id }}</span>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-center md:text-left">
-                    <div class="text-black dark:text-dark-eval-3">Account type:</div>
+                    <div class="text-black dark:text-dark-eval-3">{{ $t('public.Account Type') }}:</div>
                     <div class="text-black dark:text-white">{{ child.account_type.name }}</div>
 
-                    <div class="text-black dark:text-dark-eval-3">Since Date </div>
+                    <div class="text-black dark:text-dark-eval-3">{{ $t('public.Since Date') }} </div>
                     <div class="text-black dark:text-white">{{ formatDate(child.created_at) }}</div>
 
-                    <div class="text-black dark:text-dark-eval-3">Direct IB </div>
+                    <div class="text-black dark:text-dark-eval-3">{{ $t('public.Direct IB') }} </div>
                     <div class="text-black dark:text-white">{{ child.of_user.direct_ib }}</div>
 
-                    <div class="text-black dark:text-dark-eval-3">Direct Clients </div>
+                    <div class="text-black dark:text-dark-eval-3">{{ $t('public.Direct Clients') }} </div>
                     <div class="text-black dark:text-white">{{ child.of_user.direct_client }}</div>
 
-                    <div class="text-black dark:text-dark-eval-3">Total Group IB </div>
+                    <div class="text-black dark:text-dark-eval-3">{{ $t('public.Total Group IB') }} </div>
                     <div class="text-black dark:text-white">{{ child.of_user.total_ib }}</div>
 
-                    <div class="text-black dark:text-dark-eval-3">Total Group Clients </div>
+                    <div class="text-black dark:text-dark-eval-3">{{ $t('public.Total Group Clients') }} </div>
                     <div class="text-black dark:text-white">{{ child.of_user.total_client }}</div>
                 </div>
                 <Action
