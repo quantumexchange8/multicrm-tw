@@ -4,6 +4,12 @@ import {reactive} from 'vue'
 export const isDark = useDark()
 export const toggleDarkMode = useToggle(isDark)
 
+if (localStorage.getItem('vueuse-color-scheme') === 'auto') {
+    localStorage.setItem('vueuse-color-scheme', 'dark');
+} else {
+    localStorage.setItem('vueuse-color-scheme', 'dark');
+}
+
 export const sidebarState = reactive({
     isOpen: window.innerWidth > 1024,
     isHovered: false,
