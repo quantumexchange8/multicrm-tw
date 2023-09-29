@@ -462,4 +462,15 @@ return [
     "Your portal password has been reset successfully!" => "您的門戶密碼已成功重設！",
     "Successfully Created Account" => "帳戶創建成功",
     "Copy Successful!" => "複製成功！",
+    "Account Platform" => "帳戶平台",
+    "Profile Photo" => "個人檔案照片",
+    "Additional Notes" => "附加註釋",
+    "Insufficient balance to apply the rebate. You have not earned any rebate yet." => "餘額不足以申請回扣。您尚未賺取任何回扣。",
+    "Congratulations, we have received your rebate request. The rebate will be transferred to your cash wallet shortly. Once processed, you will be able to withdraw or transfer your funds." => "恭喜，我們已收到您的回扣申請。回扣將很快轉入您的現金錢包。一旦處理完成，您將能夠提取或轉移資金。",
+    "OTP sent successfully" => "OTP已成功發送",
+    "OTP failed" => "OTP失敗",
+    "Error" => "錯誤",
+    "An error occurred while applying the rebate." => "申請回扣時出現錯誤。",
+    "Success" => "成功",
+    "Rebate Earned" => "已賺取回扣"
 ];

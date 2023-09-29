@@ -462,4 +462,15 @@ return [
     "Your portal password has been reset successfully!" => "Your portal password has been reset successfully!",
     "Successfully Created Account" => "Successfully Created Account",
     "Copy Successful!" => "Copy Successful!",
+    "Account Platform" => "Account Platform",
+    "Profile Photo" => "Profile Photo",
+    "Additional Notes" => "Additional Notes",
+    "Insufficient balance to apply the rebate. You have not earned any rebate yet." => "Insufficient balance to apply the rebate. You have not earned any rebate yet.",
+    "Congratulation, we have received your rebate request. The rebate will be transferred to your cash wallet shortly. Once processed, you will be able to withdraw or transfer your funds." => "Congratulation, we have received your rebate request. The rebate will be transferred to your cash wallet shortly. Once processed, you will be able to withdraw or transfer your funds.",
+    "OTP sent successfully" => "OTP sent successfully",
+    "OTP failed" => "OTP failed",
+    "Error" => "Error",
+    "An error occured while applying the rebate." => "An error occured while applying the rebate.",
+    "Success" => "Success",
+    "Rebate Earned" => "Rebate Earned"
 ];
