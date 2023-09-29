@@ -11,6 +11,7 @@ import QrcodeVue from 'qrcode.vue';
 import {DuplicateIcon} from "@heroicons/vue/outline";
 import toast from "@/Composables/toast.js";
 import {usePage} from "@inertiajs/vue3";
+import {trans} from "laravel-vue-i18n";
 
 const submitDeposit = ref(false)
 const cryptoWallets = ref([]);
@@ -50,27 +51,18 @@ const form = useForm('post', route('payment.deposit'), {
 });
 
 function copyTestingCode () {
-    let walletAddressCopy = document.querySelector('#cryptoWalletAddress')
-    walletAddressCopy.setAttribute('type', 'text');
-    walletAddressCopy.select();
+    const walletCrypto = document.querySelector('#cryptoWalletAddress').textContent;
 
-    try {
-        var successful = document.execCommand('copy');
-        if (successful) {
-            toast.add({
-                message: trans('public.Copy Successful!'),
-            });
-        } else {
-            alert('Try again later')
-        }
+    const tempInput = document.createElement('input');
+    tempInput.value = walletCrypto;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
 
-    } catch (err) {
-        alert('Oops, unable to copy');
-    }
-
-    /* unselect the range */
-    walletAddressCopy.setAttribute('type', 'hidden')
-    window.getSelection().removeAllRanges()
+    toast.add({
+        message: trans('public.Copy Successful!'),
+    });
 }
 
 const openDepositModal = () => {
@@ -138,8 +130,7 @@ const closeModal = () => {
                 <div class="flex flex-col items-center gap-4 my-4">
                     <qrcode-vue :class="['border-4 border-white']" value="TGqosdkka9VcHB7jT6atakNyoABV2VSQkZ" :size="200"></qrcode-vue>
                     <p class="flex gap-3 text-sm dark:text-gray-400">
-                        TGqosdkka9VcHB7jT6atakNyoABV2VSQkZ
-                        <input type="hidden" id="cryptoWalletAddress" value="TGqosdkka9VcHB7jT6atakNyoABV2VSQkZ">
+                        <span id="cryptoWalletAddress" class="text-gray-500 dark:text-white">TGqosdkka9VcHB7jT6atakNyoABV2VSQkZ</span>
                         <DuplicateIcon aria-hidden="true" :class="['w-5 dark:text-white']" @click.stop.prevent="copyTestingCode" style="cursor: pointer" />
                     </p>
                 </div>
