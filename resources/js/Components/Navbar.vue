@@ -105,26 +105,43 @@ const changeLanguage = async (langVal) => {
         ]"
     >
         <div class="flex items-center gap-2">
-            <Button
-                iconOnly
-                variant="secondary"
-                type="button"
-                @click="() => { toggleDarkMode() }"
-                v-slot="{ iconSizeClasses }"
-                class="md:hidden"
-                srText="Toggle dark mode"
-            >
-                <MoonIcon
-                    v-show="!isDark"
-                    aria-hidden="true"
-                    :class="iconSizeClasses"
-                />
-                <SunIcon
-                    v-show="isDark"
-                    aria-hidden="true"
-                    :class="iconSizeClasses"
-                />
-            </Button>
+            <Dropdown align="left">
+                <template #trigger>
+                    <Button
+                        iconOnly
+                        variant="secondary"
+                        type="button"
+                        v-slot="{ iconSizeClasses }"
+                        class="md:hidden"
+                        srText="Toggle dark mode"
+                    >
+                        <LangIconDark
+                            v-show="isDark"
+                            aria-hidden="true"
+                            :class="iconSizeClasses"
+                        />
+                        <LangIconWhite
+                            v-show="!isDark"
+                            aria-hidden="true"
+                            :class="iconSizeClasses"
+                        />
+                    </Button>
+                </template>
+                <template #content>
+                    <DropdownLink @click="changeLanguage('en')">
+                        <div class="inline-flex items-center gap-2">
+                            <img class="w-5 h-5 rounded-full" src="/assets/flags/gb.png" alt="Rounded Flag">
+                            English
+                        </div>
+                    </DropdownLink>
+                    <DropdownLink @click="changeLanguage('tw')">
+                        <div class="inline-flex items-center gap-2">
+                            <img class="w-5 h-5 rounded-full" src="/assets/flags/tw.png" alt="Rounded Flag">
+                            中文 (繁)
+                        </div>
+                    </DropdownLink>
+                </template>
+            </Dropdown>
         </div>
         <div class="flex items-center gap-2">
             <Button
@@ -328,10 +345,22 @@ const changeLanguage = async (langVal) => {
             iconOnly
             variant="secondary"
             type="button"
+            @click="() => { toggleDarkMode() }"
             v-slot="{ iconSizeClasses }"
-            srText="Search"
+            class="md:hidden"
+            srText="Toggle dark mode"
         >
-            <SearchIcon aria-hidden="true" :class="iconSizeClasses" />
+            <MoonIcon
+                v-show="!isDark"
+                aria-hidden="true"
+                class="text-gray-500"
+                :class="iconSizeClasses"
+            />
+            <SunIcon
+                v-show="isDark"
+                aria-hidden="true"
+                :class="iconSizeClasses"
+            />
         </Button>
 
         <Link :href="route('dashboard')">
