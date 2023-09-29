@@ -221,7 +221,7 @@ return [
     "Deposit" => "Deposit",
     "Address" => "Address",
     "TxID" => "TxID",
-    "Receipt" => "Receipt",
+    "Payment Receipt" => "Payment Receipt",
     "Copied" => "Copied",
     "Deposit Acknowledgement 1" => ":company strictly does not accept third-party payments. All funds deposited into your trading account must be under the same name as your :company_2 trading account.",
     "Deposit Acknowledgement 2" => "Clients acknowledge that they may be required to provide information on the source(s) of the deposit(s), the Clients’ wealth in general and any other information :company deems necessary to identify the source of funds when processing a deposit request and agree to provide all information required by :company_2. Failure to provide the required information may result in significant delays in the process of your requests. :company_3 will not be responsible for any delays or losses suffered as results of that delay.",
