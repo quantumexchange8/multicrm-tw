@@ -196,6 +196,10 @@ class User extends Authenticatable implements JWTSubject, HasMedia
     {
         return $this->hasMany(TradingUser::class, 'user_id', 'id');
     }
+    public function tradingAccounts()
+    {
+        return $this->hasMany(TradingAccount::class, 'user_id', 'id');
+    }
     public function children()
     {
         return $this->hasMany(User::class, 'referral', 'ib_id');

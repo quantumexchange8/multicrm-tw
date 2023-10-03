@@ -6,6 +6,7 @@ use App\Models\AccountTypeSymbolGroup;
 use App\Models\IbAccountTypeSymbolGroupRate;
 use App\Models\RebateAllocation;
 use App\Models\RebateAllocationRate;
+use App\Models\SettingCountry;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
@@ -228,5 +229,42 @@ class NetworkController extends Controller
         }
 
         return redirect()->back()->with('toast', 'The rebate allocation has been saved!');
+    }
+
+    public function downline_info(Request $request)
+    {
+        $user = Auth::user();
+
+        $members = User::query()
+            ->whereIn('id', $user->getChildrenIds())
+            ->whereIn('role', ['member', 'ib'])
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $search = $request->input('search');
+                $query->where(function ($innerQuery) use ($search) {
+                    $innerQuery->where('first_name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%");
+                });
+            })
+            ->when($request->filled('role'), function ($query) use ($request) {
+                $role = $request->input('role');
+                $query->where('role', $role);
+            })
+            ->with(['tradingAccounts', 'media', 'upline'])
+            ->orderByDesc('created_at')
+            ->paginate(10)
+            ->withQueryString();
+
+        $countries = SettingCountry::query()
+            ->select(['id', 'name_en', 'phone_code'])
+            ->get();
+
+        $accountTypes = AccountType::where('id', 1)->first();
+
+        return Inertia::render('GroupNetwork/DownlineInfo', [
+            'members' => $members,
+            'countries' => $countries,
+            'accountTypes' => $accountTypes,
+            'filters' => \Request::only(['search', 'role']),
+        ]);
     }
 }

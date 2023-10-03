@@ -472,5 +472,6 @@ return [
     "Error" => "錯誤",
     "An error occurred while applying the rebate." => "申請回扣時出現錯誤。",
     "Success" => "成功",
-    "Rebate Earned" => "已賺取回扣"
+    "Rebate Earned" => "已賺取回扣",
+    "Downline Info" => "組織信息"
 ];

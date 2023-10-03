@@ -81,6 +81,12 @@ const { hasRole } = usePermission();
                 :title="$t('public.sidebar.Rebate Allocation')"
                 :active="route().current('group_network.rebate_allocation')"
             />
+            <SidebarCollapsibleItem
+                v-if="hasRole('ib')"
+                :href="route('group_network.downline_info')"
+                :title="$t('public.Downline Info')"
+                :active="route().current('group_network.downline_info')"
+            />
         </SidebarCollapsible>
 
         <SidebarLink

@@ -472,5 +472,6 @@ return [
     "Error" => "Error",
     "An error occured while applying the rebate." => "An error occured while applying the rebate.",
     "Success" => "Success",
-    "Rebate Earned" => "Rebate Earned"
+    "Rebate Earned" => "Rebate Earned",
+    "Downline Info" => "Downline Info"
 ];
