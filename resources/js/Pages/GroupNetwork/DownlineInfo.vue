@@ -75,7 +75,7 @@ function getRole() {
                     v-model="role"
                     @change="getRole"
                     class="block w-full text-sm"
-                    placeholder="Choose Role"
+                    :placeholder="$t('public.Choose Role')"
                 >
                     <option value="">All</option>
                     <option value="ib">IB</option>
@@ -97,7 +97,7 @@ function getRole() {
                                 aria-hidden="true"
                             />
                         </template>
-                        <Input withIcon id="name" type="text" placeholder="Name / Email" class="block w-full" v-model="search" @keydown="handleKeyDown" />
+                        <Input withIcon id="name" type="text" :placeholder="$t('public.Name') + '/' + $t('public.Email')" class="block w-full" v-model="search" @keydown="handleKeyDown" />
                     </InputIconWrapper>
                     <button type="submit" class="absolute right-1 bottom-2 py-2.5 text-gray-500 hover:text-dark-eval-4 font-medium rounded-full w-8 h-8 text-sm"><font-awesome-icon
                         icon="fa-solid fa-x"
@@ -123,28 +123,28 @@ function getRole() {
                     <thead class="text-xs font-bold text-gray-700 uppercase bg-gray-50 dark:bg-transparent dark:text-white text-center">
                     <tr class="uppercase">
                         <th scope="col" class="px-6 py-3">
-                            Name
+                            {{ $t('public.Name') }}
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Email
+                            {{ $t('public.Email') }}
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Register Date
+                            {{ $t('public.Register Date') }}
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Wallet Balance
+                            {{ $t('public.Wallet Balance') }}
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Role
+                            {{ $t('public.Role') }}
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Upline Email
+                            {{ $t('public.Upline Email') }}
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Total Account
+                            {{ $t('public.Total Account') }}
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Country
+                            {{ $t('public.Country') }}
                         </th>
                     </tr>
                     </thead>

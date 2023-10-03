@@ -473,5 +473,9 @@ return [
     "An error occurred while applying the rebate." => "申請回扣時出現錯誤。",
     "Success" => "成功",
     "Rebate Earned" => "已賺取回扣",
-    "Downline Info" => "組織信息"
+    "Downline Info" => "組織信息",
+    "Role" => "等級",
+    "Choose Role" => "選擇等級",
+    "Upline Email" => "上線郵件",
+    "Total Account" => "賬戶數量",
 ];
