@@ -12,12 +12,15 @@ use App\Models\SettingCryptoWallet;
 use App\Models\TradingAccount;
 use App\Models\TradingUser;
 use App\Models\User;
+use App\Notifications\DepositRequestNotification;
 use App\Services\ChangeTraderBalanceType;
 use App\Services\CTraderService;
 use App\Services\RunningNumberService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
@@ -68,6 +71,9 @@ class PaymentController extends Controller
         if ($request->hasFile('payment_receipt')) {
             $payment->addMedia($request->payment_receipt)->toMediaCollection('payment_receipt');
         }
+
+        Notification::route('mail', 'payment@currenttech.pro')
+            ->notify(new DepositRequestNotification($payment));
 
         return redirect()->back()->with('toast', 'Successfully submitted your deposit request');
 
@@ -188,5 +194,35 @@ class PaymentController extends Controller
             'cash_wallet' => $user->cash_wallet,
             'rebate_wallet' => $accountType->rebate_wallet
         ]);
+    }
+
+    public function deposit_approval(Request $request)
+    {
+        $payment = Payment::find($request->id);
+        $status = $request->status == "approve" ? "Successful" : "Rejected";
+        $payment->status = $status;
+        $payment->description = 'Deposit from Email Notification';
+        $payment->approval_date = Carbon::today();
+        $payment->save();
+
+        if ($payment->status == "Successful") {
+            try {
+                $trade = (new CTraderService)->createTrade($payment->to, $payment->amount, $payment->comment, ChangeTraderBalanceType::DEPOSIT);
+                $payment->ticket = $trade->getTicket();
+
+                $user = User::find($payment->user_id);
+                $user->total_deposit += $payment->amount;
+                $user->save();
+
+                return redirect('/')->with('toast', 'Successfully Approved Deposit Request');
+            } catch (\Throwable $e) {
+                if ($e->getMessage() == "Not found") {
+                    TradingUser::firstWhere('meta_login', $payment->to)->update(['acc_status' => 'Inactive']);
+                }
+                \Log::error($e->getMessage() . " " . $payment->payment_id);
+            }
+        }
+
+        return redirect('/')->with('toast', 'Successfully Rejected Deposit Request');
     }
 }

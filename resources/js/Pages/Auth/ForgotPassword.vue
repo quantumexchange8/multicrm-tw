@@ -25,8 +25,6 @@ const submit = () => {
 <template>
     <GuestLayout title="Forgot Password">
 
-        <ToastList />
-
         <ValidationErrors class="mb-4" />
 
         <form @submit.prevent="submit">

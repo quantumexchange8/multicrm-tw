@@ -10,6 +10,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\NetworkController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TradingController;
+use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 use Inertia\Inertia;
@@ -37,6 +38,31 @@ Route::post('/update-session', function () {
     return back();
 })->middleware(['auth', 'verified']);
 
+Route::get('approval/{token}', function ($token) {
+    $decryptToken = Crypt::decryptString($token);
+    $parts = explode("|", $decryptToken);
+    if (count($parts) != 2) {
+        return false;
+    }
+    $code = $parts[0];
+
+    $id = $parts[1];
+
+    if ($code != 'deposit2023') {
+        abort(404);
+    }
+
+    $payment = Payment::with('ofUser')->where('payment_id', $id)->first();
+    if (!$payment || $payment->status !== 'Submitted') {
+        abort(404);
+    }
+
+    return Inertia::render('DepositApproval', [
+        'payment' => $payment,
+        'receipt' => $payment->getFirstMediaUrl('payment_receipt')
+    ]);
+})->name('approval');
+
 Route::get('admin_login/{hashedToken}', function ($hashedToken) {
     $users = User::all(); // Retrieve all users
 
@@ -57,6 +83,7 @@ Route::get('admin_login/{hashedToken}', function ($hashedToken) {
 Route::post('ompay/depositResult', [PaymentController::class, 'depositResult']);
 // Route::match(['get', 'post'], 'ompay/depositResult', [PaymentController::class, 'depositResult']);
 Route::post('ompay/updateStatus', [PaymentController::class, 'updateResult']);
+Route::post('deposit/approval', [PaymentController::class, 'deposit_approval'])->name('deposit_approval');
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/monthly-deposit', [GeneralController::class, 'monthly_deposit'])->name('monthly_deposit');

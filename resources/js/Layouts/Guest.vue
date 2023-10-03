@@ -6,6 +6,7 @@ import { toggleDarkMode, isDark } from '@/Composables'
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import { loadLanguageAsync } from 'laravel-vue-i18n';
+import ToastList from "@/Components/ToastList.vue";
 
 defineProps({
     title: String
@@ -91,6 +92,7 @@ const changeLanguage = async (langVal) => {
                         </DropdownLink>
                     </template>
                 </Dropdown>
+                <ToastList />
                 <slot />
             </div>
         </main>

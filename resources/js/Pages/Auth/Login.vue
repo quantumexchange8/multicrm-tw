@@ -44,7 +44,6 @@ function closeDrawer() {
 
 
         <form @submit.prevent="submit">
-            <ToastList />
 
             <div class="grid gap-6 text-center">
                 <div class="space-y-2">
