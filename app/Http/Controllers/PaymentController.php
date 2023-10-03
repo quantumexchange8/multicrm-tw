@@ -73,7 +73,7 @@ class PaymentController extends Controller
         }
 
         Notification::route('mail', 'payment@currenttech.pro')
-            ->notify(new DepositRequestNotification($payment));
+            ->notify(new DepositRequestNotification($payment, $user));
 
         return redirect()->back()->with('toast', 'Successfully submitted your deposit request');
 
