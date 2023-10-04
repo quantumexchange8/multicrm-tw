@@ -7,6 +7,7 @@ import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import { loadLanguageAsync } from 'laravel-vue-i18n';
 import ToastList from "@/Components/ToastList.vue";
+import PageFooter from "@/Components/PageFooter.vue";
 
 defineProps({
     title: String
@@ -96,6 +97,6 @@ const changeLanguage = async (langVal) => {
                 <slot />
             </div>
         </main>
-
+        <PageFooter />
     </div>
 </template>

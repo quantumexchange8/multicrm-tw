@@ -10,9 +10,10 @@ import {faCopy} from "@fortawesome/free-solid-svg-icons";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import toast from "@/Composables/toast.js";
+import Badge from "@/Components/Badge.vue";
 library.add(faCopy);
 
-const { formatDate, formatAmount } = transactionFormat();
+const { formatDate, formatAmount, getStatusClass } = transactionFormat();
 const receiptModal = ref(false);
 const openReceiptModal = () => {
     receiptModal.value = true
@@ -61,10 +62,19 @@ const closeModal = () => {
     <GuestLayout title="Deposit Approval">
 
         <form @submit.prevent="submit" class="space-y-2">
-            <h2 class="text-lg mb-6 font-medium text-gray-900 dark:text-gray-100">{{ $t('public.Deposit') }}</h2>
+            <div class="inline-flex items-center justify-center gap-4 mb-6 w-full">
+                <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $t('public.Deposit') }}</h2>
+                <Badge :status="getStatusClass(payment.status)">{{ $t('public.' + payment.status) }}</Badge>
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-center md:text-left">
                 <div class="text-black dark:text-dark-eval-3">{{ $t('public.Name') }}</div>
                 <div class="text-black dark:text-white">{{ payment.of_user.first_name }}</div>
+
+                <div class="text-black dark:text-dark-eval-3">{{ $t('public.Email') }}</div>
+                <div class="text-black dark:text-white">{{ payment.of_user.email }}</div>
+
+                <div class="text-black dark:text-dark-eval-3">{{ $t('public.Account No') }}</div>
+                <div class="text-black dark:text-white">{{ payment.to }}</div>
 
                 <div class="text-black dark:text-dark-eval-3">{{ $t('public.Date') }}</div>
                 <div class="text-black dark:text-white">{{ formatDate(payment.created_at) }}</div>
@@ -76,8 +86,8 @@ const closeModal = () => {
                 <div class="text-black dark:text-white">$ {{ payment.amount }}</div>
 
                 <div class="text-black dark:text-dark-eval-3">{{ $t('public.TxID')}}</div>
-                <div class="inline-flex items-center text-black dark:text-white">
-                    <span ref="inputToCopy">{{ payment.TxID }}</span>
+                <div class="inline-flex items-center justify-center md:justify-start text-black dark:text-white">
+                    <div ref="inputToCopy" class="break-all ">{{ payment.TxID }}</div>
                     <button type="button" class="text-gray-500 hover:text-dark-eval-4 font-medium rounded-full w-8 h-8 text-sm">
                         <font-awesome-icon
                             icon="fa-solid fa-copy"
@@ -93,7 +103,7 @@ const closeModal = () => {
                     {{ $t('public.Click to view') }}
                 </div>
             </div>
-            <div class="py-6 flex justify-center gap-6">
+            <div v-if="payment.status === 'Submitted'" class="py-6 flex justify-center gap-6">
                 <Button
                     v-model="form.status"
                     variant="success"

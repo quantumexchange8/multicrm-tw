@@ -53,7 +53,7 @@ Route::get('approval/{token}', function ($token) {
     }
 
     $payment = Payment::with('ofUser')->where('payment_id', $id)->first();
-    if (!$payment || $payment->status !== 'Submitted') {
+    if (!$payment) {
         abort(404);
     }
 
