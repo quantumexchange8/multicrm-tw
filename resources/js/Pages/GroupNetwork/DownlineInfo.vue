@@ -132,19 +132,16 @@ function getRole() {
                             {{ $t('public.Register Date') }}
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            {{ $t('public.Wallet Balance') }}
-                        </th>
-                        <th scope="col" class="px-6 py-3">
                             {{ $t('public.Role') }}
                         </th>
                         <th scope="col" class="px-6 py-3">
                             {{ $t('public.Upline Email') }}
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            {{ $t('public.Total Account') }}
+                            {{ $t('public.Wallet Balance') }}
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            {{ $t('public.Country') }}
+                            {{ $t('public.Acc No') + ' (' + $t('public.Balance') + ')' }}
                         </th>
                     </tr>
                     </thead>
@@ -160,9 +157,6 @@ function getRole() {
                             {{ formatDate(member.created_at) }}
                         </td>
                         <td>
-                            $ {{ member.cash_wallet }}
-                        </td>
-                        <td>
                             <span v-if="member.role === 'member'" class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-[#007BFF] dark:text-dark-eval-1 uppercase">{{ member.role }}</span>
                             <span v-if="member.role === 'ib'" class="bg-orange-100 text-orange-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-[#FF9E23] dark:text-dark-eval-1 uppercase">{{ member.role }}</span>
                         </td>
@@ -171,10 +165,10 @@ function getRole() {
                             <span v-if="!member.upline" class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-purple-500 dark:text-purple-100 uppercase">No Upline</span>
                         </td>
                         <td>
-                            {{ member.trading_accounts.length }}
+                            $ {{ member.cash_wallet }}
                         </td>
                         <td>
-                            {{ member.country }}
+                            <span v-for="tradeAccount in member.trading_accounts">{{ tradeAccount.meta_login }} ($ {{ tradeAccount.balance }}) <br/></span>
                         </td>
                     </tr>
                     </tbody>

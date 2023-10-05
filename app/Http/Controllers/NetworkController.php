@@ -7,6 +7,8 @@ use App\Models\IbAccountTypeSymbolGroupRate;
 use App\Models\RebateAllocation;
 use App\Models\RebateAllocationRate;
 use App\Models\SettingCountry;
+use App\Models\TradingUser;
+use App\Services\CTraderService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
@@ -234,6 +236,17 @@ class NetworkController extends Controller
     public function downline_info(Request $request)
     {
         $user = Auth::user();
+        $conn = (new CTraderService)->connectionStatus();
+        $ids = $user->getChildrenIds();
+
+        if ($conn['code'] == 0) {
+            try {
+                $tradingUsers = TradingUser::whereIn('user_id', $ids)->where('acc_status', 'Active')->whereNot('module', 'pamm')->get();
+                (new CTraderService)->getUserInfo($tradingUsers);
+            } catch (\Exception $e) {
+                \Log::error('CTrader Error');
+            }
+        }
 
         $members = User::query()
             ->whereIn('id', $user->getChildrenIds())
