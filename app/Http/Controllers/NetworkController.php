@@ -235,6 +235,13 @@ class NetworkController extends Controller
 
     public function downline_info(Request $request)
     {
+        return Inertia::render('GroupNetwork/DownlineInfo', [
+            'filters' => \Request::only(['search', 'role']),
+        ]);
+    }
+
+    public function getDownlineInfo(Request $request)
+    {
         $user = Auth::user();
         $conn = (new CTraderService)->connectionStatus();
         $ids = $user->getChildrenIds();
@@ -256,7 +263,10 @@ class NetworkController extends Controller
                 $search = $request->input('search');
                 $query->where(function ($innerQuery) use ($search) {
                     $innerQuery->where('first_name', 'like', "%{$search}%")
-                        ->orWhere('email', 'like', "%{$search}%");
+                        ->orWhere('email', 'like', "%{$search}%")
+                        ->orWhereHas('tradingAccounts', function ($accQuery) use ($search) {
+                            $accQuery->where('meta_login', 'like', "%{$search}%");
+                        });
                 });
             })
             ->when($request->filled('role'), function ($query) use ($request) {
@@ -268,17 +278,6 @@ class NetworkController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        $countries = SettingCountry::query()
-            ->select(['id', 'name_en', 'phone_code'])
-            ->get();
-
-        $accountTypes = AccountType::where('id', 1)->first();
-
-        return Inertia::render('GroupNetwork/DownlineInfo', [
-            'members' => $members,
-            'countries' => $countries,
-            'accountTypes' => $accountTypes,
-            'filters' => \Request::only(['search', 'role']),
-        ]);
+        return response()->json($members);
     }
 }
