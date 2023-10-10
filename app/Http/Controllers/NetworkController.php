@@ -243,18 +243,6 @@ class NetworkController extends Controller
     public function getDownlineInfo(Request $request)
     {
         $user = Auth::user();
-        $conn = (new CTraderService)->connectionStatus();
-        $ids = $user->getChildrenIds();
-
-        if ($conn['code'] == 0) {
-            try {
-                $tradingUsers = TradingUser::whereIn('user_id', $ids)->get();
-                (new CTraderService)->getUserInfo($tradingUsers);
-                \Log::info($tradingUsers);
-            } catch (\Exception $e) {
-                \Log::error('CTrader Error');
-            }
-        }
 
         $members = User::query()
             ->whereIn('id', $user->getChildrenIds())
@@ -273,7 +261,7 @@ class NetworkController extends Controller
                 $role = $request->input('role');
                 $query->where('role', $role);
             })
-            ->with(['tradingAccounts:user_id,meta_login,balance,credit', 'media', 'upline:id,email'])
+            ->with(['tradingAccounts:user_id,meta_login,balance,credit', 'upline:id,email'])
             ->select('id', 'first_name', 'email', 'created_at', 'role', 'upline_id', 'cash_wallet')
             ->orderByDesc('created_at')
             ->paginate(10)
