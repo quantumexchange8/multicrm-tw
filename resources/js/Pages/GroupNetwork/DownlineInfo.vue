@@ -30,6 +30,9 @@ watch(
     }, 300)
 );
 
+function refreshTable() {
+    getResults();
+}
 
 const members = ref({data: []});
 const isLoading = ref(false);
@@ -146,6 +149,14 @@ const paginationActiveClass = [
         </div>
 
         <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
+            <div class="flex justify-end">
+                <font-awesome-icon
+                    icon="fa-solid fa-rotate-right"
+                    class="flex-shrink-0 w-5 h-5 cursor-pointer dark:text-dark-eval-4"
+                    aria-hidden="true"
+                    @click="refreshTable"
+                />
+            </div>
             <div class="relative overflow-x-auto sm:rounded-lg mt-4">
                 <div v-if="isLoading" class="w-full flex justify-center my-12">
                     <Loading />
