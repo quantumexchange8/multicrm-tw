@@ -241,8 +241,9 @@ class NetworkController extends Controller
 
         if ($conn['code'] == 0) {
             try {
-                $tradingUsers = TradingUser::whereIn('user_id', $ids)->where('acc_status', 'Active')->whereNot('module', 'pamm')->get();
+                $tradingUsers = TradingUser::whereIn('user_id', $ids)->get();
                 (new CTraderService)->getUserInfo($tradingUsers);
+                \Log::info($tradingUsers);
             } catch (\Exception $e) {
                 \Log::error('CTrader Error');
             }
