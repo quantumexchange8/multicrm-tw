@@ -416,7 +416,7 @@ function startCountdown() {
                         <span>{{ $t('pagination.Next') }}</span>
                     </Button>
 
-                    <Button type="button" v-else @click="submit" class="px-12">
+                    <Button v-else @click="submit" :disabled="form.processing" class="px-12">
                         <span>{{ $t('public.Register') }}</span>
                     </Button>
 

@@ -36,6 +36,7 @@ function refreshTable() {
 
 const members = ref({data: []});
 const isLoading = ref(false);
+const currentPage = ref(1);
 const getResults = async (page = 1, type = '', search = '') => {
     isLoading.value = true;
     try {
@@ -51,6 +52,7 @@ const getResults = async (page = 1, type = '', search = '') => {
 
         const response = await axios.get(url);
         members.value = response.data;
+
     } catch (error) {
         console.error(error);
     } finally {
@@ -87,6 +89,14 @@ const paginationClass = [
 const paginationActiveClass = [
     'dark:bg-transparent border-0 text-[#FF9E23] dark:text-[#FF9E23]'
 ];
+
+const handlePageChange = (newPage) => {
+    if (newPage >= 1) {
+        currentPage.value = newPage;
+
+        getResults(currentPage.value);
+    }
+};
 
 </script>
 
@@ -222,6 +232,7 @@ const paginationActiveClass = [
                         :data="members"
                         :limit=1
                         :keepLength="true"
+                        @pagination-change-page="handlePageChange"
                     />
                 </div>
             </div>
