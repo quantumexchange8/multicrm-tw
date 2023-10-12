@@ -140,7 +140,7 @@ class InternalTransferController extends Controller
         }
 
         $request->validate([
-            'account_no' => 'required|string',
+            'account_no' => 'required',
             'amount' => 'required|numeric|min:0',
         ]);
 
