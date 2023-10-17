@@ -194,7 +194,7 @@ const submit = () => {
 
                 <div class="space-y-2">
                     <Label for="front_identity">
-                        Proof of Identity (FRONT)
+                        {{ $t('public.Proof of Identity') }}
                         <a v-if="frontIdentity" href="javascript:void(0);" @click.prevent="openFrontIdentityModal" class="text-blue-500 hover:underline ml-2">Click to view</a>
                     </Label>
                     <Modal :show="frontIdentityModal" @close="closeModal">
@@ -206,9 +206,9 @@ const submit = () => {
                                 <span class="sr-only">Close modal</span>
                             </button>
                             <div class="px-6 py-6 lg:px-8">
-                                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white"> Proof of Identity (Front)</h3>
+                                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white"> {{ $t('public.Proof of Identity') }}</h3>
                                 <div class="flex justify-center">
-                                    <img class="rounded" :src="frontIdentity" alt="Proof of Identity (Front)">
+                                    <img class="rounded" :src="frontIdentity" alt="Proof of Identity">
                                 </div>
                             </div>
                         </div>
@@ -225,7 +225,7 @@ const submit = () => {
 
                 <div class="space-y-2">
                     <Label for="back_identity">
-                        Proof of Identity (BACK)
+                        {{ $t('public.Proof of Address') }}
                         <a v-if="backIdentity" href="javascript:void(0);" @click.prevent="openBackIdentityModal" class="text-blue-500 hover:underline ml-2">Click to view</a>
                     </Label>
                     <Modal :show="backIdentityModal" @close="closeModal">
@@ -237,9 +237,9 @@ const submit = () => {
                                 <span class="sr-only">Close modal</span>
                             </button>
                             <div class="px-6 py-6 lg:px-8">
-                                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white"> Proof of Identity (Back)</h3>
+                                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white"> {{ $t('public.Proof of Address') }}</h3>
                                 <div class="flex justify-center">
-                                    <img class="rounded" :src="backIdentity" alt="Proof of Identity (Back)">
+                                    <img class="rounded" :src="backIdentity" alt="Proof of Address">
                                 </div>
                             </div>
                         </div>

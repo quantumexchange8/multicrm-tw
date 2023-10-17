@@ -161,7 +161,7 @@ const closeModal = () => {
 
                     </div>
                     <div class="space-y-2">
-                        <Label for="front_identity">{{ $t('public.Proof of Identity (FRONT)') }}</Label>
+                        <Label for="front_identity">{{ $t('public.Proof of Identity') }}</Label>
 
                         <Input
                             v-if="frontIdentity"
@@ -199,7 +199,7 @@ const closeModal = () => {
                         </Modal>
                     </div>
                     <div class="space-y-2">
-                        <Label for="back_identity">{{ $t('public.Proof of Identity (BACK)') }}</Label>
+                        <Label for="back_identity">{{ $t('public.Proof of Address') }}</Label>
                         <Input
                             v-if="backIdentity"
                             id="back_identity"
