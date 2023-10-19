@@ -78,7 +78,7 @@ class User extends Authenticatable implements JWTSubject, HasMedia
         return $this;
     }
 
-    public function getMonthlyDeposit()
+    public function getMonthlyDeposit(): string
     {
         $amount = Payment::query()
             ->where('user_id', Auth::id())
@@ -94,7 +94,7 @@ class User extends Authenticatable implements JWTSubject, HasMedia
         return number_format($amount, 2, '.', '');
     }
 
-    public function getMonthlyWithdrawal()
+    public function getMonthlyWithdrawal(): string
     {
         $amount = Payment::query()
             ->where('user_id', Auth::id())
@@ -110,7 +110,7 @@ class User extends Authenticatable implements JWTSubject, HasMedia
         return number_format($amount, 2, '.', '');
     }
 
-    public function setReferralId()
+    public function setReferralId(): void
     {
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz';
         $idLength = strlen((string)$this->id);
@@ -126,55 +126,67 @@ class User extends Authenticatable implements JWTSubject, HasMedia
         $this->save();
     }
 
-    public function getChildrenIds()
+    public function getChildrenIds(): array
     {
-        $users = User::query()->where('hierarchyList', 'like', '%-' . $this->id . '-%')
+        return User::query()->where('hierarchyList', 'like', '%-' . $this->id . '-%')
             ->where('status', 1)
             ->pluck('id')->toArray();
-
-        return $users;
     }
 
-    public function totalGroupDeposit()
+    public function totalGroupDeposit($user_id): string
     {
         $users = $this->getChildrenIds();
-        $users[] = Auth::id();
+        $users[] = $user_id;
 
-        return Payment::query()
+        $amount = Payment::query()
             ->whereIn('user_id', $users)
-            ->where('type','=', 'Deposit')
+            ->where('type', '=', 'Deposit')
             ->where('status', '=', 'Successful')
             ->sum('amount');
+
+        $formattedAmount = number_format($amount, 2, '.', ''); // Format to 2 decimal places with no thousands separator
+
+        // If the amount is 0, set it to '0.00'
+        if ($formattedAmount === '0') {
+            $formattedAmount = '0.00';
+        }
+
+        return $formattedAmount;
     }
 
-    public function totalGroupWithdrawal()
+    public function totalGroupWithdrawal($user_id): string
     {
         $users = $this->getChildrenIds();
-        $users[] = Auth::id();
+        $users[] = $user_id;
 
-        return Payment::query()
+        $amount = Payment::query()
             ->whereIn('user_id', $users)
-            ->where('type','=', 'Withdrawal')
+            ->where('type', '=', 'Withdrawal')
             ->where('status', '=', 'Successful')
             ->sum('amount');
+
+        $formattedAmount = number_format($amount, 2, '.', ''); // Format to 2 decimal places with no thousands separator
+
+        // If the amount is 0, set it to '0.00'
+        if ($formattedAmount === '0') {
+            $formattedAmount = '0.00';
+        }
+
+        return $formattedAmount;
     }
 
     public function getIbUserIds()
     {
-        $users = User::query()->where('role', 'ib')->where('hierarchyList', 'like', '%-' . $this->id . '-%')
+        return User::query()->where('role', 'ib')->where('hierarchyList', 'like', '%-' . $this->id . '-%')
             ->where('status', 1)
             ->pluck('id')->toArray();
-
-        return $users;
     }
 
-    public function getMemberUserIds()
+    public function getMemberUserIds(): array
     {
-        $users = User::query()->where('role', 'member')->where('hierarchyList', 'like', '%-' . $this->id . '-%')
+        return User::query()->where('role', 'member')->where('hierarchyList', 'like', '%-' . $this->id . '-%')
             ->where('status', 1)
             ->pluck('id')->toArray();
-
-        return $users;
     }
 
     public function getActivitylogOptions(): LogOptions
