@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Payment;
 use App\Models\PaymentAccount;
+use App\Models\SettingWalletAddress;
 use App\Models\TradingAccount;
 use App\Models\TradingUser;
 use Illuminate\Support\Facades\App;
@@ -40,5 +41,12 @@ class RightbarService
             'bankAccounts' => $bankAccounts,
             'cryptoAccounts' => $cryptoAccounts,
         ]);
+    }
+
+    public function randomWalletAddress(): \Illuminate\Http\JsonResponse
+    {
+        $wallet_address = SettingWalletAddress::inRandomOrder()->first();
+
+        return response()->json($wallet_address);
     }
 }

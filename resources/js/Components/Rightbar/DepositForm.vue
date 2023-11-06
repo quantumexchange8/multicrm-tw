@@ -21,6 +21,7 @@ const selectedAccountPlatform = ref(null);
 
 const page = usePage();
 const getPaymentAccount = page.props.getPaymentAccount;
+const randomWalletAddress = page.props.randomWalletAddress;
 
 const depositMethods = [
     { id: 'deposit_method', src: '/assets/finance/cryptocurrency.png', value: 'crypto', name: 'Cryptocurrency' },
@@ -128,9 +129,9 @@ const closeModal = () => {
                 <h2 class="text-lg mb-2 font-medium text-gray-900 dark:text-gray-100">{{ $t('public.Cryptocurrency') }}</h2>
                 <hr>
                 <div class="flex flex-col items-center gap-4 my-4">
-                    <qrcode-vue :class="['border-4 border-white']" value="TKWnFU8WEeWorhp5RPtwVX6xUmteNN1QJc" :size="200"></qrcode-vue>
+                    <qrcode-vue :class="['border-4 border-white']" :value="randomWalletAddress.original.wallet_address" :size="200"></qrcode-vue>
                     <p class="flex gap-3 text-sm dark:text-gray-400">
-                        <span id="cryptoWalletAddress" class="text-gray-500 dark:text-white">TKWnFU8WEeWorhp5RPtwVX6xUmteNN1QJc</span>
+                        <span id="cryptoWalletAddress" class="text-gray-500 dark:text-white">{{ randomWalletAddress.original.wallet_address }}</span>
                         <DuplicateIcon aria-hidden="true" :class="['w-5 dark:text-white']" @click.stop.prevent="copyTestingCode" style="cursor: pointer" />
                     </p>
                 </div>
