@@ -167,6 +167,9 @@ const paginationActiveClass = [
                     <th scope="col" class="px-4 py-3">
                         {{ $t('public.Status')}}
                     </th>
+                    <th scope="col" class="px-4 py-3">
+                        {{ $t('public.Remark')}}
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -185,6 +188,9 @@ const paginationActiveClass = [
                     </th>
                     <th class="px-6 py-2 font-thin rounded-r-full">
                         <Badge :status="getStatusClass(withdrawal.status)">{{ $t('public.' + withdrawal.status) }}</Badge>
+                    </th>
+                    <th class="px-2 py-4 font-thin">
+                        {{ withdrawal.description }}
                     </th>
                 </tr>
                 </tbody>

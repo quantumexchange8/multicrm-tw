@@ -478,4 +478,5 @@ return [
     "Choose Role" => "選擇等級",
     "Upline Email" => "上線郵件",
     "Total Account" => "賬戶數量",
+    "Remark" => "評論",
 ];
