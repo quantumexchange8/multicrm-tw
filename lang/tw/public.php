@@ -479,4 +479,5 @@ return [
     "Upline Email" => "上線郵件",
     "Total Account" => "賬戶數量",
     "Remark" => "評論",
+    "Floating" => "浮動",
 ];

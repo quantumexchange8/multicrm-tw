@@ -82,6 +82,14 @@ function formatDate(date) {
     return formattedDate.replace(/-/g, '/');
 }
 
+function calculateFloating(tradeAccount){
+    const balance = parseFloat(tradeAccount.balance) || 0;
+    const credit = parseFloat(tradeAccount.credit) || 0;
+    const equity = parseFloat(tradeAccount.equity) || 0;
+
+    return (balance + credit - equity);
+}
+
 const paginationClass = [
     'bg-transparent border-0 text-gray-500'
 ];
@@ -195,6 +203,12 @@ const handlePageChange = (newPage) => {
                         <th scope="col" class="px-6 py-3">
                             {{ $t('public.Acc No') + ' (' + $t('public.Balance') + ')' }}
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            {{ $t('public.Floating') }}
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            {{ $t('public.Equity') }}
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -221,6 +235,12 @@ const handlePageChange = (newPage) => {
                         </td>
                         <td>
                             <span v-for="tradeAccount in member.trading_accounts">{{ tradeAccount.meta_login }} ($ {{ tradeAccount.balance }}) <br/></span>
+                        </td>
+                        <td>
+                            <span v-for="tradeAccount in member.trading_accounts">$ {{ parseFloat(calculateFloating(tradeAccount)).toFixed(2) }}<br/></span>
+                        </td>
+                        <td>
+                            <span v-for="tradeAccount in member.trading_accounts">$ {{ tradeAccount.equity }}<br/></span>
                         </td>
                     </tr>
                     </tbody>

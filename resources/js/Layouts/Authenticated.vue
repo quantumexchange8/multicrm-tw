@@ -54,7 +54,7 @@ defineProps({
                 </div>
             </div>
 
-            <PageFooter />
+            <PageFooter class="mb-20 sm:mb-0"/>
         </div>
     </div>
 </template>

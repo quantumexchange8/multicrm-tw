@@ -479,4 +479,5 @@ return [
     "Upline Email" => "Upline Email",
     "Total Account" => "Total Account",
     "Remark" => "Remark",
+    "Floating" => "Floating",
 ];

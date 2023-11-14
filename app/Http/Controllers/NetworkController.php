@@ -261,7 +261,7 @@ class NetworkController extends Controller
                 $role = $request->input('role');
                 $query->where('role', $role);
             })
-            ->with(['tradingAccounts:user_id,meta_login,balance,credit', 'upline:id,email'])
+            ->with(['tradingAccounts:user_id,meta_login,balance,credit,equity', 'upline:id,email'])
             ->select('id', 'first_name', 'email', 'created_at', 'role', 'upline_id', 'cash_wallet')
             ->orderByDesc('created_at')
             ->paginate(10)
