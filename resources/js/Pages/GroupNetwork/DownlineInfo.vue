@@ -84,10 +84,9 @@ function formatDate(date) {
 
 function calculateFloating(tradeAccount){
     const balance = parseFloat(tradeAccount.balance) || 0;
-    const credit = parseFloat(tradeAccount.credit) || 0;
     const equity = parseFloat(tradeAccount.equity) || 0;
 
-    return (balance + credit - equity);
+    return (equity - balance);
 }
 
 const paginationClass = [
