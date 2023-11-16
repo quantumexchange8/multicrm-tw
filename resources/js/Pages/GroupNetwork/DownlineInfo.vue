@@ -13,12 +13,15 @@ import Button from "@/Components/Button.vue";
 import InputSelect from "@/Components/InputSelect.vue";
 import {TailwindPagination} from "laravel-vue-pagination";
 import Loading from "@/Components/Loading.vue";
+import { transactionFormat } from '@/Composables/index.js';
 
 library.add(faSearch,faX,faRotateRight);
 
 const props = defineProps({
     filters: Object,
 });
+
+const { formatAmount } = transactionFormat();
 
 let search = ref(props.filters.search);
 let role = ref(props.filters.role);
@@ -80,13 +83,6 @@ function handleKeyDown(event) {
 function formatDate(date) {
     const formattedDate = new Date(date).toISOString().slice(0, 10);
     return formattedDate.replace(/-/g, '/');
-}
-
-function calculateFloating(tradeAccount){
-    const balance = parseFloat(tradeAccount.balance) || 0;
-    const equity = parseFloat(tradeAccount.equity) || 0;
-
-    return (equity - balance);
 }
 
 const paginationClass = [
@@ -203,7 +199,7 @@ const handlePageChange = (newPage) => {
                             {{ $t('public.Acc No') + ' (' + $t('public.Balance') + ')' }}
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            {{ $t('public.Floating') }}
+                            {{ $t('public.Credit') }}
                         </th>
                         <th scope="col" class="px-6 py-3">
                             {{ $t('public.Equity') }}
@@ -233,13 +229,13 @@ const handlePageChange = (newPage) => {
                             $ {{ member.cash_wallet }}
                         </td>
                         <td>
-                            <span v-for="tradeAccount in member.trading_accounts">{{ tradeAccount.meta_login }} ($ {{ tradeAccount.balance }}) <br/></span>
+                            <span v-for="tradeAccount in member.trading_accounts">{{ tradeAccount.meta_login }} ($ {{ formatAmount(tradeAccount.balance) }}) <br/></span>
                         </td>
                         <td>
-                            <span v-for="tradeAccount in member.trading_accounts">$ {{ parseFloat(calculateFloating(tradeAccount)).toFixed(2) }}<br/></span>
+                            <span v-for="tradeAccount in member.trading_accounts">$ {{ formatAmount(tradeAccount.credit) }}<br/></span>
                         </td>
                         <td>
-                            <span v-for="tradeAccount in member.trading_accounts">$ {{ tradeAccount.equity }}<br/></span>
+                            <span v-for="tradeAccount in member.trading_accounts">$ {{ formatAmount(tradeAccount.equity) }}<br/></span>
                         </td>
                     </tr>
                     </tbody>
