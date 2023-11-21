@@ -131,25 +131,25 @@ class RegisteredUserController extends Controller
             'leverage' => $inputArray['leverage']
         ];
 
-        if($inputArray['verification_via'] == 'email'){
-            $verificationType =  $inputArray['email'];
-        }else{
-            $verificationType = $inputArray['phone'];
-        }
-
-        $otp = VerifyOtp::where($inputArray['verification_via'], $verificationType)->first();
-
-        $expirationTime = Carbon::parse($otp->updated_at)->addMinutes(5);
-
-        if (Carbon::now()->greaterThan($expirationTime)) {
-            throw ValidationException::withMessages([
-                'verification_code' => 'The Verification OTP Code expired.'
-            ]);
-        }
-
-        if($otp->otp != $inputArray['verification_code']){
-            throw ValidationException::withMessages(['verification_code' => trans('validation.in', ['attribute' => 'otp'])]);
-        }
+//        if($inputArray['verification_via'] == 'email'){
+//            $verificationType =  $inputArray['email'];
+//        }else{
+//            $verificationType = $inputArray['phone'];
+//        }
+//
+//        $otp = VerifyOtp::where($inputArray['verification_via'], $verificationType)->first();
+//
+//        $expirationTime = Carbon::parse($otp->updated_at)->addMinutes(5);
+//
+//        if (Carbon::now()->greaterThan($expirationTime)) {
+//            throw ValidationException::withMessages([
+//                'verification_code' => 'The Verification OTP Code expired.'
+//            ]);
+//        }
+//
+//        if($otp->otp != $inputArray['verification_code']){
+//            throw ValidationException::withMessages(['verification_code' => trans('validation.in', ['attribute' => 'otp'])]);
+//        }
 
         $userDto = CreateUserDto::fromValidatedRequest($inputArray);
 

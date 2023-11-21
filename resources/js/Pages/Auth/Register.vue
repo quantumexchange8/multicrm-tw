@@ -39,8 +39,8 @@ const form = useForm({
     account_type: 1,
     front_identity: null,
     back_identity: null,
-    verification_via: 'email',
-    verification_code: '',
+    // verification_via: 'email',
+    // verification_code: '',
     referral_code: props.referral,
     terms: '',
 });
@@ -355,33 +355,33 @@ function startCountdown() {
                             <input type="file" id="back_identity" @change="handleBackIdentity" class="block border border-transparent bg-dark-eval-2 w-full rounded-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4 file:border-transparent file:text-sm file:font-semibold file:bg-blue-500 file:text-white hover:file:bg-blue-600 focus:ring-offset-dark-eval-1"/>
                             <InputError :message="form.errors.back_identity"/>
                         </div>
-                        <div class="space-y-5">
-                            <Label for="full_name" class="text-white" :value="$t('Verification Via')" />
-                            <div class="flex gap-x-12">
-                                <div class="flex">
-                                    <input type="radio" name="verification_via" v-model="form.verification_via" class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-radio-group-1" value="email" checked>
-                                    <label for="hs-radio-group-1" class="text-sm text-gray-300 ml-2">{{ $t('public.Email') }}</label>
-                                </div>
-
+<!--                        <div class="space-y-5">-->
+<!--                            <Label for="full_name" class="text-white" :value="$t('Verification Via')" />-->
+<!--                            <div class="flex gap-x-12">-->
 <!--                                <div class="flex">-->
-<!--                                    <input type="radio" name="verification_via" v-model="form.verification_via" class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-radio-group-2" value="phone">-->
-<!--                                    <label for="hs-radio-group-2" class="text-sm text-gray-500 ml-2 dark:text-gray-400">Phone</label>-->
+<!--                                    <input type="radio" name="verification_via" v-model="form.verification_via" class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-radio-group-1" value="email" checked>-->
+<!--                                    <label for="hs-radio-group-1" class="text-sm text-gray-300 ml-2">{{ $t('public.Email') }}</label>-->
 <!--                                </div>-->
-                            </div>
-                            <InputError :message="form.errors.verification_via"/>
-                        </div>
-                        <div class="space-y-5">
-                            <Label for="full_name" class="text-white" :value="$t('public.Verification Code')" />
-                            <div class="flex rounded-md shadow-sm">
-                                <button type="button" class="py-2 px-4 inline-flex flex-shrink-0 justify-center items-center gap-2 rounded-l-full border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm"
-                                        :disabled="isButtonDisabled"
-                                        @click="startCountdown">
-                                    {{ buttonText }}
-                                </button>
-                                <input type="text" id="hs-leading-button-add-on" name="hs-leading-button-add-on" class="py-2 px-4 block w-full border-transparent shadow-sm rounded-r-full text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 bg-[#202020] text-gray-300 focus:ring-offset-dark-eval-1" v-model="form.verification_code">
-                            </div>
-                            <InputError :message="form.errors.verification_code"/>
-                        </div>
+
+<!--&lt;!&ndash;                                <div class="flex">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <input type="radio" name="verification_via" v-model="form.verification_via" class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-radio-group-2" value="phone">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <label for="hs-radio-group-2" class="text-sm text-gray-500 ml-2 dark:text-gray-400">Phone</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </div>&ndash;&gt;-->
+<!--                            </div>-->
+<!--                            <InputError :message="form.errors.verification_via"/>-->
+<!--                        </div>-->
+<!--                        <div class="space-y-5">-->
+<!--                            <Label for="full_name" class="text-white" :value="$t('public.Verification Code')" />-->
+<!--                            <div class="flex rounded-md shadow-sm">-->
+<!--                                <button type="button" class="py-2 px-4 inline-flex flex-shrink-0 justify-center items-center gap-2 rounded-l-full border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm"-->
+<!--                                        :disabled="isButtonDisabled"-->
+<!--                                        @click="startCountdown">-->
+<!--                                    {{ buttonText }}-->
+<!--                                </button>-->
+<!--                                <input type="text" id="hs-leading-button-add-on" name="hs-leading-button-add-on" class="py-2 px-4 block w-full border-transparent shadow-sm rounded-r-full text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 bg-[#202020] text-gray-300 focus:ring-offset-dark-eval-1" v-model="form.verification_code">-->
+<!--                            </div>-->
+<!--                            <InputError :message="form.errors.verification_code"/>-->
+<!--                        </div>-->
 
                         <Input id="referral" type="hidden" v-model="form.referral_code" />
                     </div>
