@@ -44,8 +44,8 @@ class RegisterUserRequest extends FormRequest
             //Page 4
             'front_identity' => 'nullable|image|max:5120',
             'back_identity' => 'nullable|image|max:5120',
-            'verification_via' => 'required',
-            'verification_code' => 'required|string',
+//            'verification_via' => 'required',
+//            'verification_code' => 'required|string',
             'referral_code' => 'nullable|string',
             'terms' => 'required',
         ];
@@ -74,8 +74,8 @@ class RegisterUserRequest extends FormRequest
             //Page 4
             'front_identity' => 'Proof of Identity (FRONT)',
             'back_identity' => 'Proof of Identity (BACK)',
-            'verification_via' => 'Verification Via',
-            'verification_code' => 'Verification Code',
+//            'verification_via' => 'Verification Via',
+//            'verification_code' => 'Verification Code',
             'terms' => 'Term and Conditions',
         ];
     }
