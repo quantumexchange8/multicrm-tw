@@ -175,7 +175,7 @@ Route::middleware('auth')->group(function () {
          Route::get('/getDownlineInfo', [NetworkController::class, 'getDownlineInfo'])->middleware('role:ib')->name('group_network.getDownlineInfo');
          Route::get('/rebate_allocation', [NetworkController::class, 'getRebateAllocation'])->middleware('role:ib')->name('group_network.rebate_allocation');
          Route::post('/rebate_allocation', [NetworkController::class, 'updateRebateAllocation'])->middleware('role:ib')->name('updateRebate.update');
-         Route::get('/getTreeData', [NetworkController::class, 'treeData'])->name('group_network.getTreeData');
+         Route::get('/getTreeData', [NetworkController::class, 'getTreeData'])->name('group_network.getTreeData');
      });
 
 });
