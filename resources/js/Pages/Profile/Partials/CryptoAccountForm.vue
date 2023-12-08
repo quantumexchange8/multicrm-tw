@@ -6,10 +6,10 @@ import {router, useForm} from "@inertiajs/vue3";
 import Button from "@/Components/Button.vue";
 
 const crypto_types = [
-    { src: '/assets/finance/crypto/bitcoin.png', value: 'Bitcoin (BTC)', name: 'Bitcoin (BTC)' },
-    { src: '/assets/finance/crypto/ethereum.png', value: 'Ethereum (ETH)', name: 'Ethereum (ETH)' },
+    // { src: '/assets/finance/crypto/bitcoin.png', value: 'Bitcoin (BTC)', name: 'Bitcoin (BTC)' },
+    // { src: '/assets/finance/crypto/ethereum.png', value: 'Ethereum (ETH)', name: 'Ethereum (ETH)' },
     { src: '/assets/finance/crypto/usdt-tron.png', value: 'USDT (TRON)', name: 'USDT (TRON)' },
-    { src: '/assets/finance/crypto/usdt-eth.png', value: 'USDT (ETH)', name: 'USDT (ETH)' },
+    // { src: '/assets/finance/crypto/usdt-eth.png', value: 'USDT (ETH)', name: 'USDT (ETH)' },
 ];
 
 const form = useForm({

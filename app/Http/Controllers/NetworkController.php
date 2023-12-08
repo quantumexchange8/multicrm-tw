@@ -23,60 +23,6 @@ use App\Models\User;
 
 class NetworkController extends Controller
 {
-    private function buildTree($users, $isRoot = false, $parentLevel = 0) {
-        $tree = [];
-        foreach ($users as $user) {
-            $level = $isRoot ? $parentLevel : $parentLevel + 1;
-
-            $userNode = [
-                'name' => $user->first_name,
-                'profile_photo' => $user->getFirstMediaUrl('profile_photo'),
-                'total_group_deposit' => $user->totalGroupDeposit($user->id),
-                'total_group_withdrawal' => $user->totalGroupWithdrawal($user->id),
-                'email' => $user->email,
-                'role' => $user->role,
-                'level' => $level,
-                'total_ib' => count($user->getIbUserIds()),
-                'total_member' => count($user->getMemberUserIds()),
-            ];
-
-            if ($user->downline->isNotEmpty()) {
-                // Pass the correct arguments: $user->downline for users and $isRoot remains the same
-                // Also, increment the level for the recursive call
-                $userNode['children'] = $this->buildTree($user->downline, false, $level);
-            }
-
-            // If it's the root node and has only one child with no further children,
-            // return its single child directly instead of an array containing the child
-            if ($isRoot && count($tree) === 0 && isset($userNode['children'])) {
-                return $userNode['children'];
-            }
-
-            $tree[] = $userNode;
-        }
-
-        return $tree;
-    }
-
-    protected function searchChildren($user, $search)
-    {
-        $filteredChildren = collect();
-
-        foreach ($user->downline as $child) {
-            if (str_contains($child->first_name, $search) || str_contains($child->email, $search)) {
-                $filteredChildren->push($child);
-            }
-
-            $nestedFiltered = $this->searchChildren($child, $search);
-            if ($nestedFiltered->count() > 0) {
-                $child->downline = $nestedFiltered;
-                $filteredChildren->push($child);
-            }
-        }
-
-        return $filteredChildren;
-    }
-
     public function network(Request $request)
     {
         return Inertia::render('GroupNetwork/NetworkTree');
@@ -181,63 +127,6 @@ class NetworkController extends Controller
     }
 
     //end testing
-
-    public function treeData(Request $request)
-    {
-        $user = Auth::user();
-
-        $usersQuery = User::where('id', $user->id)
-            ->orWhereHas('upline', function ($query) use ($user) {
-                $query->where('id', $user->id);
-            });
-
-        $users = $usersQuery->get();
-
-        if ($request->filled('search')) {
-            $search = $request->input('search');
-
-            $filteredUsers = collect();
-            foreach ($users as $user) {
-                if (str_contains($user->first_name, $search) || str_contains($user->email, $search)) {
-                    $filteredUsers->push($user);
-                }
-
-                $filteredChildren = $this->searchChildren($user, $search);
-                if ($filteredChildren->count() > 0) {
-                    $user->downline = $filteredChildren;
-                    $filteredUsers->push($user);
-                }
-            }
-
-            $users = $filteredUsers;
-        }
-
-        if ($users->isEmpty()) {
-            // For view = no or no upline and no users, set the root node to an empty array
-            $rootNode = [
-                'name' => 'No Records'
-            ];
-        } else {
-            // For view = no or no upline, set the root node to the current user's data
-            $rootNode = [
-                'name' => $users->first()->first_name,
-                'profile_photo' => $users->first()->getFirstMediaUrl('profile_photo'),
-                'total_group_deposit' => $users->first()->totalGroupDeposit($users->first()->id),
-                'total_group_withdrawal' => $users->first()->totalGroupWithdrawal($users->first()->id),
-                'total_ib' => count($users->first()->getIbUserIds()),
-                'total_member' => count($users->first()->getMemberUserIds()),
-                'email' => $users->first()->email,
-                'role' => $users->first()->role,
-                'level' => 1,
-                'children' => []
-            ];
-
-            $tree = $this->buildTree($users, 1, 1);
-            $rootNode['children'] = $tree;
-        }
-
-        return response()->json($rootNode);
-    }
 
     public function getRebateAllocation()
     {
