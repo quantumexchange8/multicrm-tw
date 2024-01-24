@@ -110,7 +110,7 @@ Route::middleware('auth')->group(function () {
      *           Payments
      * ==============================
      */
-    Route::post('/deposit', [PaymentController::class, 'deposit'])->middleware(HandlePrecognitiveRequests::class)->name('payment.deposit');
+    Route::post('/deposit', [PaymentController::class, 'deposit'])->name('payment.deposit');
     Route::post('/requestWithdrawal', [PaymentController::class, 'requestWithdrawal'])->middleware(HandlePrecognitiveRequests::class)->name('payment.requestWithdrawal');
     Route::post('/applyRebate', [PaymentController::class, 'applyRebate'])->middleware('role:ib')->name('payment.applyRebate');
 

@@ -6,7 +6,7 @@ import Label from "@/Components/Label.vue";
 import Modal from "@/Components/Modal.vue";
 import Input from "@/Components/Input.vue";
 import {onMounted, ref} from "vue";
-import { useForm } from 'laravel-precognition-vue-inertia';
+import {useForm} from "@inertiajs/vue3";
 import QrcodeVue from 'qrcode.vue';
 import {DuplicateIcon} from "@heroicons/vue/outline";
 import toast from "@/Composables/toast.js";
@@ -41,7 +41,7 @@ const handlePaymentReceipt = (event) => {
     form.payment_receipt = event.target.files[0];
 };
 
-const form = useForm('post', route('payment.deposit'), {
+const form = useForm({
     deposit_method: '',
     account_no: '',
     currency: 'TRC20',
@@ -69,9 +69,17 @@ function copyTestingCode () {
 const openDepositModal = () => {
     submitDeposit.value = true
 }
-
+const addNewAccount = () => {
+    form.post(route('account_info.add_trading_account'), {
+        preserveScroll: true,
+        onSuccess: () => {
+            closeModal();
+            form.reset();
+        },
+    })
+}
 const submit = () => {
-    form.submit({
+    form.post(route('payment.deposit'), {
         preserveScroll: true,
         onSuccess: () => {
             closeModal();

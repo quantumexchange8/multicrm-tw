@@ -23,7 +23,7 @@ class DepositRequest extends FormRequest
     {
         return [
             'account_no' => ['required', 'numeric'],
-            'amount' => ['required', 'numeric', 'min:30'],
+            'amount' => ['required', 'numeric', 'min:10'],
             'txid' => ['required'],
             'description' => ['required'],
             'payment_receipt' => ['required', 'file'],
