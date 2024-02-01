@@ -75,12 +75,12 @@ const { hasRole } = usePermission();
                 :title="$t('public.sidebar.Network Tree')"
                 :active="route().current('group_network.network_tree')"
             />
-            <SidebarCollapsibleItem
-                v-if="hasRole('ib')"
-                :href="route('group_network.rebate_allocation')"
-                :title="$t('public.sidebar.Rebate Allocation')"
-                :active="route().current('group_network.rebate_allocation')"
-            />
+<!--            <SidebarCollapsibleItem-->
+<!--                v-if="hasRole('ib')"-->
+<!--                :href="route('group_network.rebate_allocation')"-->
+<!--                :title="$t('public.sidebar.Rebate Allocation')"-->
+<!--                :active="route().current('group_network.rebate_allocation')"-->
+<!--            />-->
             <SidebarCollapsibleItem
                 v-if="hasRole('ib')"
                 :href="route('group_network.downline_info')"

@@ -13,6 +13,7 @@ use App\Http\Controllers\TradingController;
 use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -84,6 +85,17 @@ Route::post('ompay/depositResult', [PaymentController::class, 'depositResult']);
 // Route::match(['get', 'post'], 'ompay/depositResult', [PaymentController::class, 'depositResult']);
 Route::post('ompay/updateStatus', [PaymentController::class, 'updateResult']);
 Route::post('deposit/approval', [PaymentController::class, 'deposit_approval'])->name('deposit_approval');
+Route::get('/delete_account', function () {
+    return Inertia::render('RequestDeleteAccount');
+});
+Route::post('/sendDeleteRequest', function (Request $request) {
+    $request->validate([
+        'email' => 'required|email',
+    ]);
+
+    return back()->with('toast', trans('public.Submitted'));
+})->name('sendDeleteRequest');
+
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/monthly-deposit', [GeneralController::class, 'monthly_deposit'])->name('monthly_deposit');
@@ -173,8 +185,8 @@ Route::middleware('auth')->group(function () {
          Route::get('/network_tree', [NetworkController::class, 'network'])->name('group_network.network_tree');
          Route::get('/downline_info', [NetworkController::class, 'downline_info'])->middleware('role:ib')->name('group_network.downline_info');
          Route::get('/getDownlineInfo', [NetworkController::class, 'getDownlineInfo'])->middleware('role:ib')->name('group_network.getDownlineInfo');
-         Route::get('/rebate_allocation', [NetworkController::class, 'getRebateAllocation'])->middleware('role:ib')->name('group_network.rebate_allocation');
-         Route::post('/rebate_allocation', [NetworkController::class, 'updateRebateAllocation'])->middleware('role:ib')->name('updateRebate.update');
+//         Route::get('/rebate_allocation', [NetworkController::class, 'getRebateAllocation'])->middleware('role:ib')->name('group_network.rebate_allocation');
+//         Route::post('/rebate_allocation', [NetworkController::class, 'updateRebateAllocation'])->middleware('role:ib')->name('updateRebate.update');
          Route::get('/getTreeData', [NetworkController::class, 'getTreeData'])->name('group_network.getTreeData');
      });
 
