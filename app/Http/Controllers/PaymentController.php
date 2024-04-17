@@ -199,6 +199,11 @@ class PaymentController extends Controller
     public function deposit_approval(Request $request)
     {
         $payment = Payment::find($request->id);
+
+        if ($payment->status != 'Submitted') {
+            return redirect()->back()->with('toast', 'It appears you have already approved this. Please confirm your action.');
+        }
+
         $status = $request->status == "approve" ? "Successful" : "Rejected";
         $payment->status = $status;
         $payment->description = 'Deposit from Email Notification';
