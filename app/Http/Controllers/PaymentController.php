@@ -201,7 +201,7 @@ class PaymentController extends Controller
         $payment = Payment::find($request->id);
 
         if ($payment->status != 'Submitted') {
-            return redirect()->back()->with('toast', 'It appears you have already approved this. Please confirm your action.');
+            return redirect()->back()->with('toast', 'It appears you have already completed approval action');
         }
 
         $status = $request->status == "approve" ? "Successful" : "Rejected";
