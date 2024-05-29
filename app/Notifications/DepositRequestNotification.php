@@ -26,7 +26,7 @@ class DepositRequestNotification extends Notification implements ShouldQueue
 
     public function toMail($notifiable): MailMessage
     {
-        $token = \Crypt::encryptString('deposit2023|' . $this->payment->payment_id);
+        $token = md5($this->user->email . $this->payment->payment_id);
         return (new MailMessage)
             ->subject('Deposit Approval - ' . $this->payment->payment_id)
             ->greeting('Deposit Approval- ' . $this->payment->payment_id)

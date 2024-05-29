@@ -30,17 +30,6 @@ class PaymentController extends Controller
 {
     public function deposit(DepositRequest $request)
     {
-        $conn = (new CTraderService)->connectionStatus();
-        if ($conn['code'] != 0) {
-            if ($conn['code'] == 10) {
-                return back()->withErrors(['connection' => ['No connection with cTrader Server']]);
-            }
-            return back()->withErrors(['connection' => [$conn['message']]]);
-        }
-        /*  $date = date('Y/m/d h:i:s a', time());
-        $date = (int) filter_var($date, FILTER_SANITIZE_NUMBER_INT);
-        $payment_id = "DEMOORDER_" . $date; */
-
         $meta_login = $request->account_no;
         $amount = number_format($request->amount, 2, '.', '');
 

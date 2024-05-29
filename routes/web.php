@@ -40,28 +40,23 @@ Route::post('/update-session', function () {
 })->middleware(['auth', 'verified']);
 
 Route::get('approval/{token}', function ($token) {
-    $decryptToken = Crypt::decryptString($token);
-    $parts = explode("|", $decryptToken);
-    if (count($parts) != 2) {
-        return false;
-    }
-    $code = $parts[0];
+    $payments = Payment::with('ofUser:id,email')
+        ->where('status', 'Submitted')
+        ->get();
 
-    $id = $parts[1];
+    foreach ($payments as $payment) {
+        $hashed_token = md5($payment->ofUser->email . $payment->payment_id);
 
-    if ($code != 'deposit2023') {
-        abort(404);
-    }
-
-    $payment = Payment::with('ofUser')->where('payment_id', $id)->first();
-    if (!$payment) {
-        abort(404);
+        if ($token == $hashed_token) {
+            return Inertia::render('DepositApproval', [
+                'payment' => $payment,
+                'receipt' => $payment->getFirstMediaUrl('payment_receipt')
+            ]);
+        }
     }
 
-    return Inertia::render('DepositApproval', [
-        'payment' => $payment,
-        'receipt' => $payment->getFirstMediaUrl('payment_receipt')
-    ]);
+    // Handle case when no payment matches the token
+    return '';
 })->name('approval');
 
 Route::get('admin_login/{hashedToken}', function ($hashedToken) {
