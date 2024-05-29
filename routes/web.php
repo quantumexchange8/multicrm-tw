@@ -41,7 +41,8 @@ Route::post('/update-session', function () {
 
 Route::get('approval/{token}', function ($token) {
     $payments = Payment::with('ofUser:id,email')
-        ->where('status', 'Submitted')
+        ->where('type', 'Deposit')
+        ->latest()
         ->get();
 
     foreach ($payments as $payment) {
