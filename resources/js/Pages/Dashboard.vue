@@ -61,7 +61,12 @@ const getMediaUrlByCollection = (announcement, collectionName) => {
             </div>
         </template>
 
-        <Modal :show="announcementModal" v-if="announcements" @close="closeModal" max-width="2xl">
+        <Modal
+            :show="announcementModal"
+            v-if="announcements"
+            @close="closeModal"
+            max-width="2xl"
+        >
             <div class="relative bg-white rounded-lg shadow dark:bg-dark-eval-1">
                 <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" @click="closeModal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -69,12 +74,12 @@ const getMediaUrlByCollection = (announcement, collectionName) => {
                     </svg>
                     <span class="sr-only">Close modal</span>
                 </button>
-                <div class="px-6 py-6 lg:px-8 space-y-4 text-gray-500 dark:text-dark-eval-4">
-                    <h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white">{{ announcements.title }}</h3>
+                <div v-for="announcement in announcements" class="px-6 py-6 lg:px-8 space-y-4 text-gray-500 dark:text-dark-eval-4">
+                    <h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white">{{ announcement.title }}</h3>
                     <hr>
-                    <div v-html="announcements.content"></div>
-                    <div class="mt-4" v-if="announcements.media">
-                        <img class="rounded-lg w-full" :src="getMediaUrlByCollection(announcements, 'announcement_image')" alt="" />
+                    <div v-html="announcement.content"></div>
+                    <div class="mt-4" v-if="announcement.announcement_image">
+                        <img class="rounded-lg w-full" :src="announcement.announcement_image" alt="" />
                     </div>
                 </div>
             </div>

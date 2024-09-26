@@ -20,10 +20,18 @@ class DashboardController extends Controller
             ->with('media')
             ->where('status', 'Active')
             ->where('popup', true)
-            ->where('start_date', '<=', $today)
-            ->where('end_date', '>=', $today)
+            ->whereDate('start_date', '<=', $today)
+            ->whereDate('end_date', '>=', $today)
             ->latest()
-            ->first();
+            ->get()
+            ->map(function ($announcement) {
+                return [
+                    'title' => $announcement->title,
+                    'content' => $announcement->content,
+                    'announcement_image' => $announcement->getFirstMediaUrl('announcement_image'),
+                ];
+            });
+
         $highlights = SettingHighlight::query()->latest()->first();
 
         return Inertia::render('Dashboard', [
