@@ -40,7 +40,7 @@ Route::post('/update-session', function () {
 })->middleware(['auth', 'verified']);
 
 Route::get('approval/{token}', function ($token) {
-    $payments = Payment::with('ofUser:id,email')
+    $payments = Payment::with('ofUser:id,first_name,email')
         ->where('type', 'Deposit')
         ->latest()
         ->get();
